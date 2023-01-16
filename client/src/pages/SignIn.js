@@ -1,12 +1,13 @@
 import React from "react";
 import { useState } from "react";
+import "./background.css";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
-    <div>
+    <div className="main">
       <h1>Login</h1>
       <form>
         <input
