@@ -1,14 +1,22 @@
 import React from "react";
 import { useState } from "react";
 
-const SignIn = () => {
+const Register = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   return (
     <div>
-      <h1>Login</h1>
+      <h1>Register</h1>
       <form>
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          type="text"
+          placeholder="Name"
+        />
+        <br />
         <input
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -23,10 +31,10 @@ const SignIn = () => {
           placeholder="Password"
         />
         <br />
-        <input type="submit" value="Login" />
+        <input type="submit" value="Register" />
       </form>
     </div>
   );
 };
 
-export default SignIn;
+export default Register;

@@ -20,9 +20,13 @@ const Navigation = () => {
         <Container>
           <Navbar.Brand
             href="/"
-            style={{ fontSize: 30, fontFamily: "cursive", marginLeft: "-5%" }}
+            style={{ fontSize: 30, fontFamily: "cursive", marginLeft: "-10%" }}
           >
-            <img src={logo} alt="logo" /> CraftCart
+            <img
+              src={logo}
+              alt="logo"
+              style={{ minHeight: "80px", maxHeight: "150px" }}
+            />
           </Navbar.Brand>
 
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
