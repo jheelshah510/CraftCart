@@ -1,6 +1,6 @@
 import "./App.css";
 import Navigation from "./components/Navigation";
-import Register from "./pages/Register";
+import HomeSignIn from "./pages/HomeSignIn";
 import { BrowserRouter, Route } from "react-router-dom";
 import SignIn from "./pages/SignIn";
 
@@ -9,7 +9,7 @@ function App() {
     <div>
       <BrowserRouter>
         <Route exact path="/" component={Navigation} />
-        <Route exact path="/register" component={Register} />
+        <Route exact path="/register" component={HomeSignIn} />
         <Route exact path="/signin" component={SignIn} />
       </BrowserRouter>
     </div>
