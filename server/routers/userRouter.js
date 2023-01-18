@@ -2,6 +2,9 @@ const router = require("express").Router();
 const User = require("../models/user.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
+//register
+
 router.post("/", async (req, res) => {
   try {
     const { username, email, password, passwordVerify } = req.body;
@@ -38,7 +41,7 @@ router.post("/", async (req, res) => {
 
     const savedUser = await newUser.save();
 
-    //signin user
+    //signin token
 
     const token = jwt.sign(
       {
@@ -46,11 +49,66 @@ router.post("/", async (req, res) => {
       },
       process.env.JWT_SECRET
     );
-    console.log(token);
+    //send the token in http-cookie
+
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+      })
+      .send();
   } catch (err) {
     console.log(err);
     res.status(500).send();
   }
+});
+
+//login
+router.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    //validate
+    if (!email || !password)
+      return res.status(400).json({ errormsg: "Enter required credentials" });
+
+    const existingUser = await User.findOne({ email });
+    if (!existingUser)
+      return res.status(401).json({ errormsg: "Wrong username or password" });
+
+    const passwordCorrect = await bcrypt.compare(
+      password,
+      existingUser.passwordHash
+    );
+    if (!passwordCorrect)
+      return res.status(401).json({ errormsg: "Wrong username or password" });
+
+    //signin token
+
+    const token = jwt.sign(
+      {
+        user: existingUser._id,
+      },
+      process.env.JWT_SECRET
+    );
+    //send the token in http-cookie
+
+    res
+      .cookie("token", token, {
+        httpOnly: true,
+      })
+      .send();
+  } catch (err) {
+    console.log(err);
+    res.status(500).send();
+  }
+});
+//logout
+router.get("/logout", (req, res) => {
+  res
+    .cookie("token", "", {
+      httpOnly: true,
+      expires: new Date(0),
+    })
+    .send();
 });
 
 module.exports = router;
