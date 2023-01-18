@@ -17,7 +17,7 @@ const HomeSignIn = () => {
           <Form.Group controlId="formBasicEmail">
             <Form.Label>&nbsp;Email address</Form.Label>
             <Form.Control
-              style={{width: 600}}
+              style={{ width: 600 }}
               type="email"
               placeholder="Enter email"
               onChange={(e) => setEmail(e.target.value)}
@@ -27,20 +27,23 @@ const HomeSignIn = () => {
           <Form.Group controlId="formBasicPassword">
             <Form.Label>&nbsp;Password</Form.Label>
             <Form.Control
-              style={{width: 600}}
+              style={{ width: 600 }}
               type="password"
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit" style={{align: 'center'}}>
+          <Button variant="primary" type="submit" style={{ align: "center" }}>
             Create Account
           </Button>
         </Form>
         <Row className="py-3">
           <Col>
-            Are you a seller? <Link to="#" style={{color: 'blue'}}>SignIn Here</Link>
+            Are you a seller?{" "}
+            <Link to="#" style={{ color: "blue" }}>
+              SignIn Here
+            </Link>
           </Col>
         </Row>
       </div>
