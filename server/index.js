@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
 const app = express();
 
@@ -18,7 +19,13 @@ mongoose.connect(
 );
 const PORT = process.env.PORT || 3030;
 app.listen(PORT, () => {
-  console.log("server started");
+  console.log(`server started at ${PORT}`);
 });
-
+app.use(express.json());
+app.use(cookieParser());
+app.use(
+  cors({
+    origin: ["http://localhost:3000"],
+  })
+);
 app.use("/auth", require("./routers/userRouter"));
