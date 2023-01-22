@@ -22,7 +22,9 @@ const HomeSignIn = () => {
         passwordVerify,
       };
 
-      await axios.post("http://localhost:3030/auth/", registerData);
+      await axios.post("http://localhost:3030/auth/", registerData, {
+        withCredentials: true,
+      });
     } catch (err) {
       console.log(err);
     }
