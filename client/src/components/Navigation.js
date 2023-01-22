@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -6,8 +6,11 @@ import Navbar from "react-bootstrap/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
 import logo from "../CraftCart.png";
+import AuthContext from "../context/AuthContext";
 
 const Navigation = () => {
+  const { loggedIn } = useContext(AuthContext);
+  console.log(loggedIn);
   return (
     <>
       <Navbar
