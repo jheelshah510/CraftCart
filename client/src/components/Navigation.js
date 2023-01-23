@@ -28,7 +28,13 @@ const Navigation = () => {
             <img
               src={logo}
               alt="logo"
-              style={{ minHeight: "80px", maxHeight: "150px" }}
+              style={{
+                minHeight: "30px",
+                maxHeight: "75px",
+                marginLeft: "65px",
+                paddingTop: "10px",
+                paddingBottom: "10px",
+              }}
             />
           </Navbar.Brand>
 
