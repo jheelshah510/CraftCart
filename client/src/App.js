@@ -3,7 +3,7 @@ import Navigation from "./components/Navigation";
 import { BrowserRouter, Route } from "react-router-dom";
 import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
-import signIn from "./pages/signIn";
+import signIn from "./pages/SignIn";
 
 axios.defaults.withCredentials = true;
 
