@@ -1,10 +1,9 @@
 import "./App.css";
 import Navigation from "./components/Navigation";
-import HomeSignIn from "./pages/HomeSignIn";
 import { BrowserRouter, Route } from "react-router-dom";
-import SignIn from "./pages/SignIn";
 import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
+import signIn from "./pages/signIn";
 
 axios.defaults.withCredentials = true;
 
@@ -14,8 +13,7 @@ function App() {
       <AuthContextProvider>
         <BrowserRouter>
           <Route exact path="/" component={Navigation} />
-          <Route exact path="/register" component={HomeSignIn} />
-          <Route exact path="/signin" component={SignIn} />
+          <Route exact path="/signin" component={signIn} />
         </BrowserRouter>
       </AuthContextProvider>
     </>
