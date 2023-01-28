@@ -1,12 +1,16 @@
 .carousel {
-    width:70%;
-    height:100vh;
-    margin: auto;
-    float: right;
+  width: 70%;
+  height: 100vh;
+  margin: auto;
+  float: right;
+}
+@media (max-width: 900px) {
+  .carousel {
+    width: auto;
+    height: auto;
   }
-  @media (max-width: 900px) {
-    .carousel {
-      width:auto;
-      height:auto;
-    }
+}
+
+img {
+  height: 100vh;
 }
