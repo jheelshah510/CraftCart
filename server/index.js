@@ -30,4 +30,4 @@ app.use(
   })
 );
 app.use("/auth", require("./routers/userRouter"));
-// app.use("/sellauth", require("./routers/sellerRoute"));
+app.use("/sellauth", require("./routers/sellerRoute"));
