@@ -20,11 +20,18 @@ const Register = () => {
         passwordVerify,
       };
 
-      await axios.post("http://localhost:3030/auth/", registerData, {
-        withCredentials: true,
-      });
+      await axios
+        .post("http://localhost:3030/auth/", registerData, {
+          withCredentials: true,
+        })
+        .then((res) => {
+          const tom = res;
+          alert(tom.data.msg);
+        });
     } catch (err) {
       console.log(err);
+      const tim = err;
+      alert(tim.response.data.errormsg);
     }
   }
   return (
@@ -81,7 +88,7 @@ const Register = () => {
             />
           </Form.Group>
           <Button variant="outline-primary" type="submit">
-            SignIn
+            Register
           </Button>
           <br />
           Wanna become a seller?Click{" "}
