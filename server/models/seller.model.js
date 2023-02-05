@@ -8,6 +8,14 @@ const sellerSchema = new mongoose.Schema({
   passwordHash: { type: String, required: true },
   location: { type: String, required: true },
   pincode: { type: Number, required: true },
+  category: {
+    type: [
+      {
+        type: String,
+        required: true,
+      },
+    ],
+  },
   // imageScehma: imageSchema,
 });
 

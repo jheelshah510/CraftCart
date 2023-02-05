@@ -7,8 +7,15 @@ const jwt = require("jsonwebtoken");
 
 router.post("/", async (req, res) => {
   try {
-    const { name, email, password, passwordVerify, location, pincode } =
-      req.body;
+    const {
+      name,
+      email,
+      password,
+      passwordVerify,
+      location,
+      pincode,
+      category,
+    } = req.body;
     //validations
 
     if (
@@ -17,7 +24,8 @@ router.post("/", async (req, res) => {
       !password ||
       !passwordVerify ||
       !location ||
-      !pincode
+      !pincode ||
+      !category
     )
       return res
         .status(400)
@@ -50,6 +58,7 @@ router.post("/", async (req, res) => {
       passwordHash,
       location,
       pincode,
+      category,
     });
 
     const savedSeller = await newSeller.save();

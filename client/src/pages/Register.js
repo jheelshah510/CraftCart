@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Background from "../components/Background";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import axios from "axios";
 
-const register = () => {
+const Register = () => {
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordVerify, setPasswordVerify] = useState("");
+
+  async function register(e) {
+    e.preventDefault();
+    try {
+      const registerData = {
+        username,
+        email,
+        password,
+        passwordVerify,
+      };
+
+      await axios.post("http://localhost:3030/auth/", registerData, {
+        withCredentials: true,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
   return (
     <div>
       <Background />
@@ -12,36 +35,62 @@ const register = () => {
           style={{
             display: "flex",
             justifyContent: "center",
-            paddingTop: "10vh",
-            marginBottom: "10vh",
+            paddingTop: "8vh",
+            marginBottom: "6vh",
           }}
         >
           Register
         </h1>
       </span>
       <div style={{ width: "20%", paddingLeft: "70px" }}>
-        <Form>
+        <Form onSubmit={register}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="name" />
+            <Form.Control
+              type="text"
+              placeholder="name"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
             <Form.Label>Email address</Form.Label>
-            <Form.Control type="email" placeholder="name@example.com" />
+            <Form.Control
+              type="email"
+              placeholder="name@example.com"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
             <Form.Label>Password</Form.Label>
-            <Form.Control type="password" placeholder="password" />
+            <Form.Control
+              type="password"
+              placeholder="password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
           </Form.Group>
-          <Button variant="outline-primary">SignIn</Button>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
+            <Form.Label>Verify Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="password"
+              onChange={(e) => setPasswordVerify(e.target.value)}
+              value={passwordVerify}
+            />
+          </Form.Group>
+          <Button variant="outline-primary" type="submit">
+            SignIn
+          </Button>
           <br />
           Wanna become a seller?Click{" "}
-          <a style={{ color: "blue" }} href="#">
+          <a style={{ color: "blue" }} href="/registerSeller">
             here
           </a>
           <br />
           Already have an account? Click{" "}
-          <a style={{ color: "blue" }} href="#">
+          <a style={{ color: "blue" }} href="/signin">
             here
           </a>
         </Form>
@@ -50,4 +99,4 @@ const register = () => {
   );
 };
 
-export default register;
+export default Register;

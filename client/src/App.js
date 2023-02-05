@@ -3,9 +3,9 @@ import Navigation from "./components/Navigation";
 import { BrowserRouter, Route } from "react-router-dom";
 import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
-import signIn from "./pages/SignIn";
+import SignIn from "./pages/SignIn";
 import sellersignIn from "./pages/Sellersignin";
-import register from "./pages/Register";
+import Register from "./pages/Register";
 
 axios.defaults.withCredentials = true;
 
@@ -15,9 +15,9 @@ function App() {
       <AuthContextProvider>
         <BrowserRouter>
           <Route exact path="/" component={Navigation} />
-          <Route exact path="/signin" component={signIn} />
+          <Route exact path="/signin" component={SignIn} />
           <Route exact path="/sellersignin" component={sellersignIn} />
-          <Route exact path="/register" component={register} />
+          <Route exact path="/register" component={Register} />
         </BrowserRouter>
       </AuthContextProvider>
     </>
