@@ -3,7 +3,7 @@ import Background from "../components/Background";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const signIn = () => {
+const register = () => {
   return (
     <div>
       <Background />
@@ -16,27 +16,31 @@ const signIn = () => {
             marginBottom: "10vh",
           }}
         >
-          Sign In
+          Register
         </h1>
       </span>
       <div style={{ width: "20%", paddingLeft: "70px" }}>
         <Form>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Label>Username</Form.Label>
+            <Form.Control type="text" placeholder="name" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
             <Form.Label>Email address</Form.Label>
             <Form.Control type="email" placeholder="name@example.com" />
           </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+          <Form.Group className="mb-3" controlId="exampleForm.ControlInput3">
             <Form.Label>Password</Form.Label>
             <Form.Control type="password" placeholder="password" />
           </Form.Group>
           <Button variant="outline-primary">SignIn</Button>
           <br />
-          Are you a seller?Click{" "}
+          Wanna become a seller?Click{" "}
           <a style={{ color: "blue" }} href="#">
             here
           </a>
           <br />
-          Are you a new user?To register Click{" "}
+          Already have an account? Click{" "}
           <a style={{ color: "blue" }} href="#">
             here
           </a>
@@ -46,4 +50,4 @@ const signIn = () => {
   );
 };
 
-export default signIn;
+export default register;

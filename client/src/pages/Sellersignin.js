@@ -3,7 +3,7 @@ import Background from "../components/Background";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 
-const signIn = () => {
+const sellersignIn = () => {
   return (
     <div>
       <Background />
@@ -16,7 +16,7 @@ const signIn = () => {
             marginBottom: "10vh",
           }}
         >
-          Sign In
+          Seller Sign In
         </h1>
       </span>
       <div style={{ width: "20%", paddingLeft: "70px" }}>
@@ -30,20 +30,10 @@ const signIn = () => {
             <Form.Control type="password" placeholder="password" />
           </Form.Group>
           <Button variant="outline-primary">SignIn</Button>
-          <br />
-          Are you a seller?Click{" "}
-          <a style={{ color: "blue" }} href="#">
-            here
-          </a>
-          <br />
-          Are you a new user?To register Click{" "}
-          <a style={{ color: "blue" }} href="#">
-            here
-          </a>
         </Form>
       </div>
     </div>
   );
 };
 
-export default signIn;
+export default sellersignIn;
