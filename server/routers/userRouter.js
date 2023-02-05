@@ -42,7 +42,7 @@ router.post("/", async (req, res) => {
     const savedUser = await newUser.save();
 
     //signin token
-
+    res.status(200).json({ msg: "account created successfully" });
     const token = jwt.sign(
       {
         user: savedUser._id,
