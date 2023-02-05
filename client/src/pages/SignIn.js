@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Background from "../components/Background";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
+import AuthContext from "../context/AuthContext";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const { loggedIn } = useContext(AuthContext);
+  console.log(loggedIn);
   async function login(e) {
     e.preventDefault();
     try {
@@ -21,6 +23,8 @@ const SignIn = () => {
       });
     } catch (err) {
       console.log(err);
+      const tim = err;
+      alert(tim.response.data.errormsg);
     }
   }
   return (

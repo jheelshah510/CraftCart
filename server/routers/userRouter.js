@@ -81,6 +81,7 @@ router.post("/login", async (req, res) => {
     if (!passwordCorrect)
       return res.status(401).json({ errormsg: "Wrong username or password" });
 
+    res.status(200).json({ msg: "Sigin successull" });
     //signin token
 
     const token = jwt.sign(
