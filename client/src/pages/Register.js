@@ -20,14 +20,12 @@ const Register = () => {
         passwordVerify,
       };
 
-      await axios
-        .post("http://localhost:3030/auth/", registerData, {
-          withCredentials: true,
-        })
-        .then((res) => {
-          const tom = res;
-          alert(tom.data.msg);
-        });
+      await axios.post("http://localhost:3030/auth/", registerData, {
+        withCredentials: true,
+      });
+      setTimeout(() => {
+        alert("Register success");
+      });
     } catch (err) {
       console.log(err);
       const tim = err;
