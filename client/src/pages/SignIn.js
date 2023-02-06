@@ -21,6 +21,9 @@ const SignIn = () => {
       await axios.post("http://localhost:3030/auth/login", loginData, {
         withCredentials: true,
       });
+      setTimeout(() => {
+        alert("Sigin success");
+      });
     } catch (err) {
       console.log(err);
       const tim = err;
