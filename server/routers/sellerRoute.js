@@ -12,9 +12,9 @@ router.post("/", async (req, res) => {
       email,
       password,
       passwordVerify,
-      address,
+      location,
       pincode,
-      // category,
+      category,
     } = req.body;
     //validations
 
@@ -23,10 +23,9 @@ router.post("/", async (req, res) => {
       !email ||
       !password ||
       !passwordVerify ||
-      !address ||
-      !pincode
-      // ||
-      // !category
+      !location ||
+      !pincode ||
+      !category
     )
       return res
         .status(400)
@@ -57,9 +56,9 @@ router.post("/", async (req, res) => {
       name,
       email,
       passwordHash,
-      address,
+      location,
       pincode,
-      // category,
+      category,
     });
 
     const savedSeller = await newSeller.save();
