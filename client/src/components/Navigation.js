@@ -4,13 +4,13 @@ import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../CraftCart.png";
 import AuthContext from "../context/AuthContext";
 
 const Navigation = () => {
   const { loggedIn } = useContext(AuthContext);
-  console.log(loggedIn);
+
   return (
     <>
       <Navbar
@@ -49,11 +49,23 @@ const Navigation = () => {
                 />
               </Form>
             </Nav>
-            <Nav className="mr-sm-4">
-              <>
-                <Nav.Link href="#">Login</Nav.Link>
-              </>
-            </Nav>
+            {!loggedIn && (
+              <Nav className="mr-sm-4">
+                <>
+                  <Nav.Link href="/signin">Login</Nav.Link>
+                </>
+              </Nav>
+            )}
+            {loggedIn && (
+              <Nav className="mr-sm-4">
+                <>
+                  <Nav.Link href="#">
+                    <FontAwesomeIcon icon={faUser} />
+                  </Nav.Link>
+                </>
+              </Nav>
+            )}
+
             <Nav className="mr-sm-4">
               <>
                 <Nav.Link href="#">
