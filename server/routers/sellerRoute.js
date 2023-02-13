@@ -24,9 +24,8 @@ router.post("/", async (req, res) => {
       !password ||
       !passwordVerify ||
       !address ||
-      !pincode
-      // ||
-      // !category
+      !pincode ||
+      !category
     )
       return res
         .status(400)

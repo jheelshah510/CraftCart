@@ -10,7 +10,7 @@ import AuthContext from "../context/AuthContext";
 
 const Navigation = () => {
   const { loggedIn } = useContext(AuthContext);
-
+  console.log(loggedIn);
   return (
     <>
       <Navbar
@@ -65,7 +65,6 @@ const Navigation = () => {
                 </>
               </Nav>
             )}
-
             <Nav className="mr-sm-4">
               <>
                 <Nav.Link href="#">
