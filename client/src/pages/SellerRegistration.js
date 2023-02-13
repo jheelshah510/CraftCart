@@ -5,7 +5,8 @@ import Button from 'react-bootstrap/Button'
 const SellerRegistration = () => {
   return (
     <div>
-    <Form>
+    <h1 style={{marginLeft: '65vh'}}>Seller Registration</h1>
+    <Form style={{width: '50vh', marginLeft: '65vh', marginTop: '5vh'}}>
 
       <Form.Group className="mb-3" controlId="formBasicName">
         <Form.Label>Name</Form.Label>
@@ -27,6 +28,7 @@ const SellerRegistration = () => {
         <Form.Control type="number" placeholder="Enter Phone Number" />
       </Form.Group>
 
+      <Form.Label>Categories</Form.Label>
       {['checkbox'].map((type) => (
         <div key={`inline-${type}`} className="mb-3">
           <Form.Check
@@ -81,6 +83,21 @@ const SellerRegistration = () => {
           />
         </div>
       ))}
+
+      <Form.Group className="mb-3" controlId="formBasicAddress">
+        <Form.Label>Address</Form.Label>
+        <Form.Control type="text" placeholder="Enter Address" />
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPinCode">
+        <Form.Label>PinCode</Form.Label>
+        <Form.Control type="number" placeholder="Enter Pin Code" />
+      </Form.Group>
+
+      <Form.Group controlId="formFile" className="mb-3">
+        <Form.Label>Add Government Issued Id Proof</Form.Label>
+        <Form.Control type="file" />
+      </Form.Group>
 
       <Button variant="primary" type="submit">
         Submit
