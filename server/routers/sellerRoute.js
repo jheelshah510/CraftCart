@@ -18,15 +18,7 @@ router.post("/", async (req, res) => {
     } = req.body;
     //validations
 
-    if (
-      !name ||
-      !email ||
-      !password ||
-      !passwordVerify ||
-      !address ||
-      !pincode ||
-      !category
-    )
+    if (!name || !email || !password || !passwordVerify || !address || !pincode)
       return res
         .status(400)
         .json({ errormsg: "Please fill all required details" });
