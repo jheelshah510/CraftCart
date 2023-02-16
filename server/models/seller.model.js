@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-
+const Category = require("./category.model");
 // const imageSchema = new mongoose.Schema({});
 
 const sellerSchema = new mongoose.Schema({
@@ -11,12 +11,9 @@ const sellerSchema = new mongoose.Schema({
   isSeller: { type: Boolean, default: true, required: true },
   isAdmin: { type: Boolean, default: false, required: true },
   // category: {
-  //   type: [
-  //     {
   //       type: String,
   //       required: true,
-  //     },
-  //   ],
+
   // },
   // imageScehma: imageSchema,
 });
