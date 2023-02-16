@@ -2,23 +2,43 @@ const router = require("express").Router();
 const Seller = require("../models/seller.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const { cloudinary } = require("../utility/cloudinary");
 
 //register
 
 router.post("/", async (req, res) => {
   try {
-    const {
-      name,
-      email,
-      password,
-      passwordVerify,
-      address,
-      pincode,
-      // category,
-    } = req.body;
+    const { name, email, password, passwordVerify, address, pincode } =
+      req.body;
     //validations
+    let images = [...req.body.images];
+    console.log(images);
+    let imagesBuffer = [];
 
-    if (!name || !email || !password || !passwordVerify || !address || !pincode)
+    for (let i = 0; i < images.length; i++) {
+      const result = await cloudinary.uploader.upload(images[i], {
+        folder: "id_proof",
+        width: 1920,
+        crop: "scale",
+      });
+
+      imagesBuffer.push({
+        public_id: result.public_id,
+        url: result.secure_url,
+      });
+    }
+
+    req.body.images = imagesBuffer;
+    // console.log(imagesBuffer);
+    if (
+      !name ||
+      !email ||
+      !password ||
+      !passwordVerify ||
+      !address ||
+      !pincode ||
+      !images
+    )
       return res
         .status(400)
         .json({ errormsg: "Please fill all required details" });
@@ -43,6 +63,14 @@ router.post("/", async (req, res) => {
     //hash password
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
+
+    //image
+
+    // const result = await cloudinary.uploader.upload(images, {
+    //   folder: "id_proof",
+    //   width:300,
+    //   crop:"scale"
+    // });
     //save new user account to db
     const newSeller = new Seller({
       name,
@@ -50,6 +78,12 @@ router.post("/", async (req, res) => {
       passwordHash,
       address,
       pincode,
+      images: [
+        {
+          public_id: result.public_id,
+          url: result.secure_url,
+        },
+      ],
       // category,
     });
 
