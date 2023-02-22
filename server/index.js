@@ -8,7 +8,7 @@ const bodyParser = require("body-parser");
 const app = express();
 
 app.use(bodyParser.json({ limit: "50mb" }));
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: false }));
 
 app.use(express.json());
 app.use(cookieParser());
@@ -36,3 +36,4 @@ app.use(
 app.use("/auth", require("./routers/userRouter"));
 app.use("/sellauth", require("./routers/sellerRoute"));
 app.use("/category", require("./routers/categoryRouter"));
+app.use("/product", require("./routers/productRouter"));
