@@ -50,6 +50,7 @@ const SellerRegistration = () => {
   const handleSubmitFile = async (e) => {
     e.preventDefault();
     // if (!images) return;
+    console.log(images);
     try {
       const sellerRegisterData = {
         name,
@@ -79,6 +80,8 @@ const SellerRegistration = () => {
       });
     } catch (error) {
       console.log(error);
+      const tim = error;
+      alert(tim.response.data.errormsg);
     }
   };
   // const uploadImage = async (base64EncodedImage) => {
@@ -99,6 +102,7 @@ const SellerRegistration = () => {
       <Form
         style={{ width: "75vh", marginLeft: "65vh", marginTop: "5vh" }}
         onSubmit={handleSubmitFile}
+        encType="multipart/form-data"
       >
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>

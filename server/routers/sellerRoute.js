@@ -3,7 +3,7 @@ const Seller = require("../models/seller.model");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { cloudinary } = require("../utility/cloudinary");
-
+const upload = require("../utility/multer");
 //register
 
 router.post("/", async (req, res) => {
