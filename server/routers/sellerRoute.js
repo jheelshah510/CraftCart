@@ -4,31 +4,43 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { cloudinary } = require("../utility/cloudinary");
 const upload = require("../utility/multer");
+const fs = require("fs");
 //register
 
-router.post("/", async (req, res) => {
+router.post("/", upload.array("image"), async (req, res) => {
   try {
     const { name, email, password, passwordVerify, address, pincode } =
       req.body;
-    //validations
-    let images = [...req.body.images];
-    console.log(images);
-    let imagesBuffer = [];
+    const images = req.body.images;
 
-    for (let i = 0; i < images.length; i++) {
-      const result = await cloudinary.uploader.upload(images[i], {
-        folder: "id_proof",
-        width: 1920,
-        crop: "scale",
-      });
+    const uploadedImages = [];
 
-      imagesBuffer.push({
-        public_id: result.public_id,
-        url: result.secure_url,
-      });
+    for (const image of images) {
+      const result = await cloudinary.uploader.upload(image.path);
+      console.log(result);
+      uploadedImages.push(result.secure_url);
     }
 
-    req.body.images = imagesBuffer;
+    // console.log(images);
+    //validations
+    // let images = [...req.body.images];
+    // console.log(images);
+    // let imagesBuffer = [];
+
+    // for (let i = 0; i < images.length; i++) {
+    //   const result = await cloudinary.uploader.upload(images[i], {
+    //     folder: "id_proof",
+    //     width: 1920,
+    //     crop: "scale",
+    //   });
+
+    // imagesBuffer.push({
+    //   public_id: result.public_id,
+    //   url: result.secure_url,
+    // });
+    // }
+
+    // req.body.images = imagesBuffer;
     // console.log(imagesBuffer);
     if (
       !name ||
@@ -36,8 +48,9 @@ router.post("/", async (req, res) => {
       !password ||
       !passwordVerify ||
       !address ||
-      !pincode ||
-      !images
+      !pincode
+      // ||
+      // !images
     )
       return res
         .status(400)
