@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import Badge from "react-bootstrap/Badge";
+
 import axios from "axios";
 
 const SellerRegistration = () => {
@@ -9,7 +11,7 @@ const SellerRegistration = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordVerify, setPasswordVerify] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  let [phoneNumber, setPhoneNumber] = useState("");
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState([]);
   const [images, setImages] = useState([]);
@@ -19,12 +21,15 @@ const SellerRegistration = () => {
   const handleFileInputChange = (e) => {
     // const file =e.target.files[0];
     const files = Array.from(e.target.files);
+    setImages([]);
     files.forEach((file) => {
       const reader = new FileReader();
-      reader.readAsDataURL(file);
       reader.onload = () => {
-        setImages((oldArray) => [...oldArray, reader.result]);
+        if (reader.readyState === 2) {
+          setImages((oldImages) => [...oldImages, reader.result]);
+        }
       };
+      reader.readAsDataURL(file);
     });
 
     // this.setState({ files: file });
@@ -51,33 +56,52 @@ const SellerRegistration = () => {
     e.preventDefault();
     // if (!images) return;
     console.log(images);
+    phoneNumber = "+91" + phoneNumber;
+
     try {
       const sellerRegisterData = {
         name,
         email,
         password,
         passwordVerify,
+        phoneNumber,
         address,
         pincode,
         images,
       };
+      // const formData = new FormData();
+      // formData.set("name", name);
+      // formData.set("email", email);
+      // formData.set("password", password);
+      // formData.set("passwordVerify", passwordVerify);
+      // formData.set("address", address);
+      // formData.set("pincode", pincode);
+
+      // images.forEach((image) => {
+      //   formData.append("images", image);
+      // });
+
+      // for (var pair of formData.entries()) {
+      //   console.log(pair[0] + " - " + pair[1]);
+      // }
+
+      // await axios
+      //   .post("http://localhost:3030/sellauth", sellerRegisterData, {
+      //     withCredentials: true,
+      //   })
+      //   .then(() => {
+      //     setName("");
+      //     setEmail("");
+      //     setPassword("");
+      //     setPasswordVerify("");
+      //     setAddress("");
+      //     setPincode("");
+      //     setImages([]);
+      //   });
+      // setTimeout(() => {
+      //   alert("Register success");
+      // });
       console.log(sellerRegisterData);
-      await axios
-        .post("http://localhost:3030/sellauth", sellerRegisterData, {
-          withCredentials: true,
-        })
-        .then(() => {
-          setName("");
-          setEmail("");
-          setPassword("");
-          setPasswordVerify("");
-          setAddress("");
-          setPincode("");
-          setImages([]);
-        });
-      setTimeout(() => {
-        alert("Register success");
-      });
     } catch (error) {
       console.log(error);
       const tim = error;
@@ -148,14 +172,23 @@ const SellerRegistration = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="formBasicNumber">
+        <Form.Group className="mb-3" controlId="">
           <Form.Label>Phone Number</Form.Label>
+          <Form.Label className="form-inline" htmlFor="ph-num">
+            {" "}
+            <h4>
+              <Badge bg="dark">+91</Badge>
+            </h4>
+          </Form.Label>
+
           <Form.Control
             type="number"
             placeholder="Enter Phone Number"
+            name="ph-num"
             onChange={(e) => {
               setPhoneNumber(e.target.value);
             }}
+            style={{ marginLeft: "3vw", width: "92  %", marginTop: "-6.4vh" }}
           />
         </Form.Group>
 
@@ -244,6 +277,7 @@ const SellerRegistration = () => {
             name="image"
             onChange={handleFileInputChange}
             // value={fileInputState}
+            accept="image/png, image/jpeg"
             multiple
           />
         </Form.Group>
