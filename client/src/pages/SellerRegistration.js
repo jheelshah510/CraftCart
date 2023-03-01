@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 
 import axios from "axios";
+import "../css/SellerRegister.css";
 
 const SellerRegistration = () => {
   // const [fileInputState, setfileInputState] = useState([]);
@@ -122,12 +123,19 @@ const SellerRegistration = () => {
   // };
   return (
     <div>
-      <h1 style={{ marginLeft: "65vh" }}>Seller Registration</h1>
       <Form
-        style={{ width: "75vh", marginLeft: "65vh", marginTop: "5vh" }}
+        style={{
+          width: "75vh",
+          marginLeft: "65vh",
+          marginTop: "5vh",
+        }}
         onSubmit={handleSubmitFile}
         encType="multipart/form-data"
+        className="form-backdrop"
       >
+        <h1 style={{ display: "flex", justifyContent: "center" }}>
+          Seller Registration
+        </h1>
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -188,7 +196,7 @@ const SellerRegistration = () => {
             onChange={(e) => {
               setPhoneNumber(e.target.value);
             }}
-            style={{ marginLeft: "3vw", width: "92  %", marginTop: "-6.4vh" }}
+            style={{ marginLeft: "3vw", width: "89%", marginTop: "-6.4vh" }}
           />
         </Form.Group>
 
@@ -282,7 +290,11 @@ const SellerRegistration = () => {
           />
         </Form.Group>
 
-        <Button variant="primary" type="submit">
+        <Button
+          variant="primary"
+          type="submit"
+          style={{ marginLeft: "40%", marginTop: "2vh" }}
+        >
           Submit
         </Button>
       </Form>
