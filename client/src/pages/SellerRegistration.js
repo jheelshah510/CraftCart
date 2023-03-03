@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
@@ -16,6 +16,8 @@ const SellerRegistration = () => {
   const [address, setAddress] = useState("");
   const [pincode, setPincode] = useState([]);
   const [images, setImages] = useState([]);
+  const [options, setOptions] = useState([]);
+  const [selectedOption, setSelectedOption] = useState("");
   // const [selectedFile, setSelectedFile] = useState([]);
   // const [previewSource, setPreviewSource] = useState([]);
   // console.log(images);
@@ -53,6 +55,22 @@ const SellerRegistration = () => {
   //     };
   //   });
   // };
+  useEffect(() => {
+    axios
+      .get("http://localhost:3030/category/get")
+      .then((response) => {
+        setOptions(response.data);
+        console.log(options);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
+  const handleOptionChange = (e) => {
+    console.log(e.target.values);
+  };
+
   const handleSubmitFile = async (e) => {
     e.preventDefault();
     // if (!images) return;
@@ -180,7 +198,7 @@ const SellerRegistration = () => {
           />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="">
+        <Form.Group className="mb-3">
           <Form.Label>Phone Number</Form.Label>
           <Form.Label className="form-inline" htmlFor="ph-num">
             {" "}
@@ -205,56 +223,73 @@ const SellerRegistration = () => {
           <div key={`inline-${type}`} className="mb-3">
             <Form.Check
               inline
-              label="Woodwork"
+              label={options.category[0].categoryName}
               name="group1"
               type={type}
               id={`inline-${type}-1`}
             />
             <Form.Check
               inline
-              label="Pottery"
+              label={options.category[1].categoryName}
               name="group1"
               type={type}
               id={`inline-${type}-2`}
             />
             <Form.Check
               inline
-              label="Leather"
+              label={options.category[2].categoryName}
               type={type}
               id={`inline-${type}-3`}
             />
             <Form.Check
               inline
-              label="Brass"
+              label={options.category[3].categoryName}
               type={type}
               id={`inline-${type}-4`}
             />
             <Form.Check
               inline
-              label="Paintings"
+              label={options.category[4].categoryName}
               type={type}
               id={`inline-${type}-5`}
             />
             <Form.Check
               inline
-              label="Jute"
+              label={options.category[5].categoryName}
               type={type}
               id={`inline-${type}-6`}
             />
             <Form.Check
               inline
-              label="Clothing"
+              label={options.category[6].categoryName}
               type={type}
               id={`inline-${type}-7`}
             />
             <Form.Check
               inline
-              label="Carpet Weaving"
+              label={options.category[7].categoryName}
               type={type}
               id={`inline-${type}-8`}
             />
           </div>
         ))}
+
+        {/* <Form.Group>
+          <Form.Label>Categories</Form.Label>
+          <div>
+            <Form.Control
+              as="select"
+              value={selectedOption}
+              onChange={(e) => {
+                setSelectedOption(e.target.values);
+              }}
+            >
+              {options.map((option) => (
+                <option value={option._id}>{option._categorName}</option>
+              ))}
+            </Form.Control>
+          </div>
+        </Form.Group> */}
 
         <Form.Group className="mb-3" controlId="formBasicAddress">
           <Form.Label>Address</Form.Label>
