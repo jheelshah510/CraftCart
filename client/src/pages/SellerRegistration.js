@@ -71,14 +71,31 @@ const SellerRegistration = () => {
   }, []);
 
   const handleOptionChange = (e) => {
-    const selectedOptionValues = Array.from(
-      e.target.selectedOptions,
-      (option) => option.value
-    );
-    const selectedOptions = options.filter((option) =>
-      selectedOptionValues.includes(option.value)
-    );
-    setSelectedOptions(selectedOptions);
+    // const selectedOptionValues = Array.from(
+    //   e.target.selectedOptions,
+    //   (option) => option.value
+    // );
+    // const selectedOptions = options.filter((option) =>
+    //   selectedOptionValues.includes(option.value)
+    // );
+    // setSelectedOptions(selectedOptions);
+    // const value = event.target.value;
+    // const checked = event.target.checked;
+    // console.log(value, checked);
+    // if (selectedOptions.includes(value)) {
+    //   setSelectedOptions(selectedOptions.filter((option) => option !== value));
+    // } else {
+    //   setSelectedOptions([...selectedOptions, value]);
+    // }
+    // console.log({ options: selectedOptions });
+    const value = e.target.value;
+    const checked = e.target.checked;
+    console.log(value, checked);
+    if (checked) {
+      setSelectedOptions([...selectedOptions, value]);
+    } else {
+      setSelectedOptions(selectedOptions.filter((option) => option !== value));
+    }
   };
 
   const handleSubmitFile = async (e) => {
@@ -86,6 +103,7 @@ const SellerRegistration = () => {
     // if (!images) return;
     console.log(images);
     phoneNumber = "+91" + phoneNumber;
+    console.log(selectedOptions);
 
     try {
       const sellerRegisterData = {
@@ -97,6 +115,7 @@ const SellerRegistration = () => {
         address,
         pincode,
         images,
+        selectedOptions,
       };
       // const formData = new FormData();
       // formData.set("name", name);
@@ -114,22 +133,23 @@ const SellerRegistration = () => {
       //   console.log(pair[0] + " - " + pair[1]);
       // }
 
-      // await axios
-      //   .post("http://localhost:3030/sellauth", sellerRegisterData, {
-      //     withCredentials: true,
-      //   })
-      //   .then(() => {
-      //     setName("");
-      //     setEmail("");
-      //     setPassword("");
-      //     setPasswordVerify("");
-      //     setAddress("");
-      //     setPincode("");
-      //     setImages([]);
-      //   });
-      // setTimeout(() => {
-      //   alert("Register success");
-      // });
+      await axios
+        .post("http://localhost:3030/sellauth", sellerRegisterData, {
+          withCredentials: true,
+        })
+        .then(() => {
+          setName("");
+          setEmail("");
+          setPassword("");
+          setPasswordVerify("");
+          setAddress("");
+          setPincode("");
+          setImages([]);
+          setSelectedOptions([]);
+        });
+      setTimeout(() => {
+        alert("Register success");
+      });
       console.log(sellerRegisterData);
     } catch (error) {
       console.log(error);
@@ -284,7 +304,7 @@ const SellerRegistration = () => {
           </div>
         ))} */}
 
-        <Form.Group>
+        <Form.Group controlId="formOptions">
           {/* <Form.Control
               as="select"
               value={selectedOption}
@@ -302,14 +322,13 @@ const SellerRegistration = () => {
               <div
                 className="mb-3"
                 style={{ display: "inline-block", marginLeft: "10px" }}
-                multiple
-                id="options"
               >
                 <Form.Check
                   label={option.categoryName}
                   id={option.cid}
                   key={option.cid}
                   onChange={handleOptionChange}
+                  value={option._id}
                 />
               </div>
             )))

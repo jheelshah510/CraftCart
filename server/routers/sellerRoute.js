@@ -9,17 +9,25 @@ const fs = require("fs");
 
 router.post("/", upload.array("image"), async (req, res) => {
   try {
-    const { name, email, password, passwordVerify, address, pincode } =
-      req.body;
-    const images = req.body.images;
+    const {
+      name,
+      email,
+      password,
+      passwordVerify,
+      phoneNumber,
+      address,
+      pincode,
+      selectedOptions,
+    } = req.body;
+    // const images = req.body.images;
 
-    const uploadedImages = [];
+    // const uploadedImages = [];
 
-    for (const image of images) {
-      const result = await cloudinary.uploader.upload(image.path);
-      console.log(result);
-      uploadedImages.push(result.secure_url);
-    }
+    // for (const image of images) {
+    //   const result = await cloudinary.uploader.upload(image.path);
+    //   console.log(result);
+    //   uploadedImages.push(result.secure_url);
+    // }
 
     // console.log(images);
     //validations
@@ -47,8 +55,10 @@ router.post("/", upload.array("image"), async (req, res) => {
       !email ||
       !password ||
       !passwordVerify ||
+      !phoneNumber ||
       !address ||
-      !pincode
+      !pincode ||
+      !selectedOptions
       // ||
       // !images
     )
@@ -89,15 +99,16 @@ router.post("/", upload.array("image"), async (req, res) => {
       name,
       email,
       passwordHash,
+      phoneNumber,
       address,
       pincode,
-      images: [
-        {
-          public_id: result.public_id,
-          url: result.secure_url,
-        },
-      ],
-      // category,
+      // images: [
+      //   {
+      //     public_id: result.public_id,
+      //     url: result.secure_url,
+      //   },
+      // ],
+      selectedOptions,
     });
 
     const savedSeller = await newSeller.save();
