@@ -5,6 +5,7 @@ const sellerSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
   passwordHash: { type: String, required: true },
+  phoneNumber: { type: String, required: true },
   address: { type: String, required: true },
   pincode: { type: Number, required: true },
 
@@ -13,12 +14,13 @@ const sellerSchema = new mongoose.Schema({
   //       required: true,
 
   // },
-  image: [
-    {
-      public_id: { type: String, required: true },
-      url: { type: String, required: true },
-    },
-  ],
+  // image: [
+  //   {
+  //     public_id: { type: String, required: true },
+  //     url: { type: String, required: true },
+  //   },
+  // ],
+  selectedOptions: { type: Array, required: true },
   isSeller: { type: Boolean, default: true, required: true },
   isAdmin: { type: Boolean, default: false, required: true },
 });
