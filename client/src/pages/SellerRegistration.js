@@ -17,10 +17,11 @@ const SellerRegistration = () => {
   const [pincode, setPincode] = useState([]);
   const [images, setImages] = useState([]);
   const [options, setOptions] = useState([]);
-  const [selectedOption, setSelectedOption] = useState("");
+  const [selectedOptions, setSelectedOptions] = useState([]);
   // const [selectedFile, setSelectedFile] = useState([]);
   // const [previewSource, setPreviewSource] = useState([]);
   // console.log(images);
+
   const handleFileInputChange = (e) => {
     // const file =e.target.files[0];
     const files = Array.from(e.target.files);
@@ -56,11 +57,13 @@ const SellerRegistration = () => {
   //   });
   // };
   useEffect(() => {
-    axios
-      .get("http://localhost:3030/category/get")
-      .then((response) => {
-        setOptions(response.data);
-        console.log(options);
+    fetch("http://localhost:3030/category/get")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setOptions(data.category);
+        console.log(data.category);
       })
       .catch((err) => {
         console.log(err);
@@ -68,7 +71,14 @@ const SellerRegistration = () => {
   }, []);
 
   const handleOptionChange = (e) => {
-    console.log(e.target.values);
+    const selectedOptionValues = Array.from(
+      e.target.selectedOptions,
+      (option) => option.value
+    );
+    const selectedOptions = options.filter((option) =>
+      selectedOptionValues.includes(option.value)
+    );
+    setSelectedOptions(selectedOptions);
   };
 
   const handleSubmitFile = async (e) => {
@@ -219,7 +229,7 @@ const SellerRegistration = () => {
         </Form.Group>
 
         <Form.Label>Categories</Form.Label>
-        {["checkbox"].map((type) => (
+        {/* {["checkbox"].map((type) => (
           <div key={`inline-${type}`} className="mb-3">
             <Form.Check
               inline
@@ -272,12 +282,10 @@ const SellerRegistration = () => {
               id={`inline-${type}-8`}
             />
           </div>
-        ))}
+        ))} */}
 
-        {/* <Form.Group>
-          <Form.Label>Categories</Form.Label>
-          <div>
-            <Form.Control
+        <Form.Group>
+          {/* <Form.Control
               as="select"
               value={selectedOption}
               onChange={(e) => {
@@ -285,11 +293,51 @@ const SellerRegistration = () => {
               }}
             >
               {options.map((option) => (
-                <option value={option._id}>{option._categorName}</option>
+                <option value={option.cid}>{option._categorName}</option>
               ))}
-            </Form.Control>
-          </div>
-        </Form.Group> */}
+            </Form.Control> */}
+          {
+            (["checkbox"],
+            options.map((option) => (
+              <div
+                className="mb-3"
+                style={{ display: "inline-block", marginLeft: "10px" }}
+                multiple
+                id="options"
+              >
+                <Form.Check
+                  label={option.categoryName}
+                  id={option.cid}
+                  key={option.cid}
+                  onChange={handleOptionChange}
+                />
+              </div>
+            )))
+          }
+
+          {/* <Form.Control
+            as="select"
+            multiple
+            value={selectedOptions.map((option) => option.value)}
+            onChange={handleOptionChange}
+          >
+            {options.map((option) => (
+              <div
+                className="mb-3"
+                style={{ display: "inline-block", marginLeft: "10px" }}
+                multiple
+                id="options"
+              >
+                <Form.Check
+                  label={option.categoryName}
+                  id={option.cid}
+                  key={option.cid}
+                  onChange={handleOptionChange}
+                />
+              </div>
+            ))}
+          </Form.Control> */}
+        </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicAddress">
           <Form.Label>Address</Form.Label>
