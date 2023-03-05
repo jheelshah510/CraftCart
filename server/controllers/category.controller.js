@@ -16,6 +16,7 @@ exports.addCategory = async (req, res) => {
 
     const newCategory = new Category({
       _id: new mongoose.Types.ObjectId(),
+      cid,
       categoryName,
     });
     newCategory.save((error, result) => {
