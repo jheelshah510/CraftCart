@@ -23,18 +23,19 @@ const SellerRegistration = () => {
   // console.log(images);
 
   const handleFileInputChange = (e) => {
+    setImages(e.target.files);
     // const file =e.target.files[0];
-    const files = Array.from(e.target.files);
-    setImages([]);
-    files.forEach((file) => {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.readyState === 2) {
-          setImages((oldImages) => [...oldImages, reader.result]);
-        }
-      };
-      reader.readAsDataURL(file);
-    });
+    // const files = Array.from(e.target.files);
+    // setImages([]);
+    // files.forEach((file) => {
+    //   const reader = new FileReader();
+    //   reader.onload = () => {
+    //     if (reader.readyState === 2) {
+    //       setImages((oldImages) => [...oldImages, reader.result]);
+    //     }
+    //   };
+    //   reader.readAsDataURL(file);
+    // });
 
     // this.setState({ files: file });
     // let file = [];
@@ -103,20 +104,33 @@ const SellerRegistration = () => {
     // if (!images) return;
     console.log(images);
     phoneNumber = "+91" + phoneNumber;
-    console.log(selectedOptions);
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("email", email);
+    formData.append("password", password);
+    formData.append("passwordVerify", passwordVerify);
+    formData.append("address", address);
+    formData.append("phoneNumber", phoneNumber);
+    formData.append("pincode", pincode);
+    formData.append("selectedOptions", selectedOptions);
+    for (let i = 0; i < images.length; i++) {
+      formData.append("images", images[i]);
+    }
+    // console.log(selectedOptions);
 
     try {
-      const sellerRegisterData = {
-        name,
-        email,
-        password,
-        passwordVerify,
-        phoneNumber,
-        address,
-        pincode,
-        images,
-        selectedOptions,
-      };
+      // const sellerRegisterData = {
+      //   name,
+      //   email,
+      //   password,
+      //   passwordVerify,
+      //   phoneNumber,
+      //   address,
+      //   pincode,
+      //   selectedOptions,
+      //   images,
+      // };
+
       // const formData = new FormData();
       // formData.set("name", name);
       // formData.set("email", email);
@@ -134,7 +148,7 @@ const SellerRegistration = () => {
       // }
 
       await axios
-        .post("http://localhost:3030/sellauth", sellerRegisterData, {
+        .post("http://localhost:3030/sellauth", formData, {
           withCredentials: true,
         })
         .then(() => {
@@ -150,7 +164,9 @@ const SellerRegistration = () => {
       setTimeout(() => {
         alert("Register success");
       });
-      console.log(sellerRegisterData);
+      for (var pair of formData.entries()) {
+        console.log(pair[0] + " - " + pair[1]);
+      }
     } catch (error) {
       console.log(error);
       const tim = error;
@@ -178,7 +194,6 @@ const SellerRegistration = () => {
           marginTop: "5vh",
         }}
         onSubmit={handleSubmitFile}
-        encType="multipart/form-data"
         className="form-backdrop"
       >
         <h1 style={{ display: "flex", justifyContent: "center" }}>
@@ -384,10 +399,9 @@ const SellerRegistration = () => {
           <Form.Label>Add Government Issued Id Proof</Form.Label>
           <Form.Control
             type="file"
-            name="image"
             onChange={handleFileInputChange}
             // value={fileInputState}
-            accept="image/png, image/jpeg"
+            accept="image/*"
             multiple
           />
         </Form.Group>
