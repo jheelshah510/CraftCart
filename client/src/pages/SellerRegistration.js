@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 
 import axios from "axios";
-import "../css/SellerRegister.css";
+// import "../css/SellerRegister.css";
 
 const SellerRegistration = () => {
   // const [fileInputState, setfileInputState] = useState([]);
@@ -194,7 +194,7 @@ const SellerRegistration = () => {
           marginTop: "5vh",
         }}
         onSubmit={handleSubmitFile}
-        className="form-backdrop"
+        className="shadow-lg p-5 mb-5 bg-white rounded"
       >
         <h1 style={{ display: "flex", justifyContent: "center" }}>
           Seller Registration
@@ -411,7 +411,7 @@ const SellerRegistration = () => {
           type="submit"
           style={{ marginLeft: "40%", marginTop: "2vh" }}
         >
-          Submit
+          Register
         </Button>
       </Form>
     </div>

@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
+import Navigation from "../components/Navigation";
 import one from "../components/1.png";
 import two from "../components/2.png";
 import three from "../components/3.png";
 import four from "../components/4.png";
 import five from "../components/5.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { faMinus } from "@fortawesome/free-solid-svg-icons";
+import { faMinus, faArrowLeft, faPlus } from "@fortawesome/free-solid-svg-icons";
 import './ImageSlider.css';
 import Button from "react-bootstrap/Button";
 
@@ -37,7 +37,10 @@ const ProductDetails = () => {
       }
 
   return (
-    <div className='super'>
+    <div>
+    <Navigation />
+    <Button className='add-cart' style={{marginLeft:"50vh", marginTop:"5vh"}}><FontAwesomeIcon icon={faArrowLeft} /><b> Back To Products</b></Button>
+    <div className='super' style={{marginLeft:"45vh", marginTop:"1vh"}}>
     <div className="main">
       <img src={wordData.value} style={{height: "50vh"}} alt='An Alt Text' /> 
       <div className='flex_row'>
@@ -67,6 +70,7 @@ const ProductDetails = () => {
         <Button className='add-cart'><b>Add to Cart</b></Button>
     </div>
     </div>
+        </div>
   )
 }
 
