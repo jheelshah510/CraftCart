@@ -1,10 +1,11 @@
 import React from 'react'
-import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "react-bootstrap/Button";
+import SellerNavigation from '../components/SellerNavigation';
 
 const SellerDashCustomerOrder = () => {
   return (
+    <div>
+      <SellerNavigation />
     <div style={{width: "80%", margin: "10%",}}>
         <table class="table">
   <thead class="thead-dark">
@@ -41,6 +42,7 @@ const SellerDashCustomerOrder = () => {
     </tr>
   </tbody>
 </table>
+    </div>
     </div>
   )
 }
