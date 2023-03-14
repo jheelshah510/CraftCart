@@ -6,12 +6,7 @@ const productSchema = new mongoose.Schema({
   productName: { type: String, required: true },
   description: { type: String, required: true },
   quantity: { type: Number, required: true },
-  //   images: [
-  //     {
-  //       public_id: { type: String, required: true },
-  //       url: { type: String, required: true },
-  //     },
-  //   ],
+  imageUrl: { type: Array, required: true },
   sellerName: { type: String, required: true },
   isApproved: { type: Boolean, default: false, required: true },
   isPublish: { type: Boolean, default: false, required: true },

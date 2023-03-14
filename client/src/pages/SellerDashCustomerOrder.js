@@ -46,5 +46,3 @@ const SellerDashCustomerOrder = () => {
     </div>
   )
 }
-
-export default SellerDashCustomerOrder
