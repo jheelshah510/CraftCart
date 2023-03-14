@@ -30,14 +30,14 @@ const SellerDashCustomerOrder = () => {
       <th scope="row">2</th>
       <td>Product 2</td>
       <td><Button variant="outline-primary" type="submit">
-            Edit 
+            View  
           </Button></td>
     </tr>
     <tr>
       <th scope="row">3</th>
       <td>Product 3</td>
       <td><Button variant="outline-primary" type="submit">
-            Edit 
+            View  
           </Button></td>
     </tr>
   </tbody>
@@ -46,3 +46,5 @@ const SellerDashCustomerOrder = () => {
     </div>
   )
 }
+
+export default SellerDashCustomerOrder
