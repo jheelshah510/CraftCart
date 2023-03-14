@@ -5,7 +5,17 @@ exports.addProduct = async (req, res) => {
   try {
     const { productName, description, sellerId, sellerName, quantity } =
       req.body;
-    if (!productName || !description || !sellerId || !sellerName || !quantity) {
+
+    const imageUrl = req.files.map((file) => file.location);
+    console.log(imageUrl);
+    if (
+      !productName ||
+      !description ||
+      !sellerId ||
+      !sellerName ||
+      !quantity ||
+      !imageUrl
+    ) {
       return res
         .status(400)
         .json({ errmsg: "Please fill all the required details" });
@@ -21,6 +31,7 @@ exports.addProduct = async (req, res) => {
       sellerId,
       sellerName,
       quantity,
+      imageUrl,
     });
 
     newProduct.save((error, result) => {

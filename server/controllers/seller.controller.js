@@ -15,49 +15,11 @@ exports.createSeller = async (req, res) => {
       selectedOptions,
     } = req.body;
 
-    // let idProofs = [];
-    // if (req.files.length > 0) {
-    //   idProofs = req.files.map((file) => {
-    //     return { img: file.location };
-    //   });
-    // }
-    // console.log(req.body);
-
     console.log(req.files);
 
     const imageUrl = req.files.map((file) => file.location);
     console.log(imageUrl);
-    // const images = req.body.images;
 
-    // const uploadedImages = [];
-
-    // for (const image of images) {
-    //   const result = await cloudinary.uploader.upload(image.path);
-    //   console.log(result);
-    //   uploadedImages.push(result.secure_url);
-    // }
-
-    // console.log(images);
-    //validations
-    // let images = [...req.body.images];
-    // console.log(images);
-    // let imagesBuffer = [];
-
-    // for (let i = 0; i < images.length; i++) {
-    //   const result = await cloudinary.uploader.upload(images[i], {
-    //     folder: "id_proof",
-    //     width: 1920,
-    //     crop: "scale",
-    //   });
-
-    // imagesBuffer.push({
-    //   public_id: result.public_id,
-    //   url: result.secure_url,
-    // });
-    // }
-
-    // req.body.images = imagesBuffer;
-    // console.log(imagesBuffer);
     if (
       !name ||
       !email ||
@@ -66,9 +28,8 @@ exports.createSeller = async (req, res) => {
       !phoneNumber ||
       !address ||
       !pincode ||
-      !selectedOptions
-      // ||
-      // !images
+      !selectedOptions ||
+      !imageUrl
     )
       return res
         .status(400)

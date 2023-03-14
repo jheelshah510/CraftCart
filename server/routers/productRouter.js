@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { uploadS3 } = require("../middleware/image");
 
 const {
   addProduct,
@@ -7,7 +8,7 @@ const {
   getProduct,
 } = require("../controllers/product.controller");
 
-router.post("/add", addProduct);
+router.post("/add", uploadS3.array("images"), addProduct);
 // router.get("/get", getProduct);
 
 module.exports = router;
