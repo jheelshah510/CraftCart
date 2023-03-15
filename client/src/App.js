@@ -10,6 +10,9 @@ import ProductDetails from "./pages/ProductDetails";
 import SellerRegistration from "./pages/SellerRegistration";
 import SellerDashProducts from "./pages/SellerDashProducts";
 import SellerDashCustomerOrder from "./pages/SellerDashCustomerOrder";
+import SellerAccountInfo from "./pages/SellerAccountInfo";
+import NewProductForm from "./pages/NewProductForm";
+import ProductOrderDetails from "./pages/ProductOrderDetails";
 
 axios.defaults.withCredentials = true;
 
@@ -26,6 +29,9 @@ function App() {
           <Route exact path="/sellerregistration" component={SellerRegistration} />
           <Route exact path="/sellerdashcustomerorder" component={SellerDashCustomerOrder} />
           <Route exact path="/sellerdashproducts" component={SellerDashProducts} />
+          <Route exact path="/selleraccountinfo" component={SellerAccountInfo} />
+          <Route exact path="/newproductform" component={NewProductForm} />
+          <Route exact path="/productorderdetails" component={ProductOrderDetails} />
         </BrowserRouter>
       </AuthContextProvider>
     </>

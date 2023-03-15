@@ -58,11 +58,6 @@ const SellerNavigation = () => {
               </>
             </Nav>
             <Nav className="mr-sm-4">
-              <>
-                <Nav.Link href="#">Contact</Nav.Link>
-              </>
-            </Nav>
-            <Nav className="mr-sm-4">
                 <>
                   <Nav.Link href="#">Logout</Nav.Link>
                 </>
