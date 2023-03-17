@@ -5,19 +5,42 @@ const AuthContext = createContext();
 
 function AuthContextProvider(props) {
   const [loggedIn, setLoggedIn] = useState(undefined);
+  const [userName, setUsername] = useState(null);
 
   async function getLoggedIn() {
     const loggedInRes = await axios.get("http://localhost:3030/auth/loggedIn");
-    console.log(loggedInRes);
+
     setLoggedIn(loggedInRes.data);
+    // getDataInfo(loggedInRes.data.user);
+    // setTimeout(() => {
+    //   if (loggedInRes) {
+    //     getDataInfo(loggedInRes.data.user);
+    //   }
+    // }, 1500);
   }
+
+  // async function getDataInfo(info) {
+  //   const jt = { user: info };
+
+  //   try {
+  //     await axios
+  //       .post("http://localhost:3030/userinfo", jt, {
+  //         withCredentials: true,
+  //       })
+  //       .then((res) => {
+  //         setUsername(res.data.username);
+  //       });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }
 
   useEffect(() => {
     getLoggedIn();
   }, []);
 
   return (
-    <AuthContext.Provider value={{ loggedIn, getLoggedIn }}>
+    <AuthContext.Provider value={{ loggedIn, getLoggedIn, userName }}>
       {props.children}
     </AuthContext.Provider>
   );

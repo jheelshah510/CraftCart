@@ -90,7 +90,7 @@ const Register = () => {
           </Button>
           <br />
           Wanna become a seller?Click{" "}
-          <a style={{ color: "blue" }} href="/registerSeller">
+          <a style={{ color: "blue" }} href="/sellerregistration">
             here
           </a>
           <br />
