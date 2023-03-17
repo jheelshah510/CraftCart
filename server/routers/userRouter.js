@@ -116,7 +116,10 @@ router.get("/loggedIn", (req, res) => {
     const token = req.cookies.token;
     if (!token) return res.json(false);
 
-    jwt.verify(token, process.env.JWT_SECRET);
+    jwt.verify(token, process.env.JWT_SECRET, {}, (err, info) => {
+      if (err) throw err;
+      res.json(info);
+    });
 
     res.send(true);
   } catch (err) {
@@ -124,5 +127,29 @@ router.get("/loggedIn", (req, res) => {
     res.json(false);
   }
 });
+
+//get User Info
+
+// router.post("/userinfo", async (req, res) => {
+//   try {
+//     const { user } = req.body;
+//     const datainfo = await User.findById(user);
+//     if (!datainfo) {
+//       return res.status(404).send("Document not found");
+//     } else {
+//       return res.send(datainfo);
+//     }
+//     // await User.findOne({ user }).exec((error, datainfo) => {
+//     //   if (error) return res.status(400).json({ error });
+//     //   else {
+//     //     return res.json({ datainfo });
+//     //   }
+//     // });
+//   } catch (error) {
+//     console.log(error);
+//     return res.sendStatus(500);
+
+//   }
+// });
 
 module.exports = router;

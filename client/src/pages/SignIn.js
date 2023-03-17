@@ -23,7 +23,9 @@ const SignIn = () => {
       });
       setTimeout(() => {
         alert("Sigin success");
-        window.location = "/";
+        setTimeout(() => {
+          window.location = "/";
+        }, 1500);
       });
     } catch (err) {
       console.log(err);

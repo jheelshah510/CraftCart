@@ -9,8 +9,8 @@ import logo from "../CraftCart.png";
 import AuthContext from "../context/AuthContext";
 
 const Navigation = () => {
-  const { loggedIn } = useContext(AuthContext);
-  console.log(loggedIn);
+  const { loggedIn, userName } = useContext(AuthContext);
+  console.log(userName);
   return (
     <>
       <Navbar
