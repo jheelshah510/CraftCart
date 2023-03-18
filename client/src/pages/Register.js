@@ -23,9 +23,11 @@ const Register = () => {
       await axios.post("http://localhost:3030/auth/", registerData, {
         withCredentials: true,
       });
+
+      alert("Register success");
       setTimeout(() => {
-        alert("Register success");
-      });
+        window.location = "/";
+      }, 1500);
     } catch (err) {
       console.log(err);
       const tim = err;
@@ -38,10 +40,9 @@ const Register = () => {
       <span style={{ width: "20%" }}>
         <h1
           style={{
-            display: "flex",
-            justifyContent: "center",
             paddingTop: "8vh",
             marginBottom: "6vh",
+            marginLeft: "20vh",
           }}
         >
           Register
@@ -85,16 +86,16 @@ const Register = () => {
               value={passwordVerify}
             />
           </Form.Group>
-          <Button variant="outline-primary" type="submit">
+          <Button
+            variant="outline-primary"
+            type="submit"
+            style={{ marginLeft: "10vh", marginTop: "1vh" }}
+          >
             Register
           </Button>
           <br />
-          Wanna become a seller?Click{" "}
-          <a style={{ color: "blue" }} href="/sellerregistration">
-            here
-          </a>
           <br />
-          Already have an account? Click{" "}
+          <strong>Already have an account? Click </strong>
           <a style={{ color: "blue" }} href="/signin">
             here
           </a>

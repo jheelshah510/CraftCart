@@ -79,9 +79,12 @@ const SellerRegistration = () => {
           setImages([]);
           setSelectedOptions([]);
         });
+
+      alert("Register success");
       setTimeout(() => {
-        alert("Register success");
-      });
+        window.location = "/";
+      }, 1500);
+
       for (var pair of formData.entries()) {
         console.log(pair[0] + " - " + pair[1]);
       }
