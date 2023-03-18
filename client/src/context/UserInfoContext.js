@@ -30,6 +30,12 @@ const UserInfoContextProvider = (props) => {
         {props.children}
       </UserInfoContext.Provider>
     );
+  } else {
+    return (
+      <UserInfoContext.Provider value={allData}>
+        {props.children}
+      </UserInfoContext.Provider>
+    );
   }
 };
 
