@@ -4,7 +4,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import axios from "axios";
 import { AuthContextProvider } from "./context/AuthContext";
 import SignIn from "./pages/SignIn";
-import sellersignIn from "./pages/Sellersignin";
+import SellersignIn from "./pages/Sellersignin";
 import Register from "./pages/Register";
 import ProductDetails from "./pages/ProductDetails";
 import SellerRegistration from "./pages/SellerRegistration";
@@ -26,7 +26,7 @@ function App() {
             <Route exact path="/" component={Navigation} />
           </UserInfoContextProvider>
           <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/sellersignin" component={sellersignIn} />
+          <Route exact path="/sellersignin" component={SellersignIn} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/productdetails" component={ProductDetails} />
           <Route

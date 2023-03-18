@@ -1,15 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import Background from "../components/Background";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import axios from "axios";
-import AuthContext from "../context/AuthContext";
 
 const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { loggedIn } = useContext(AuthContext);
-  console.log(loggedIn);
   async function login(e) {
     e.preventDefault();
     try {
@@ -38,10 +35,9 @@ const SignIn = () => {
       <span style={{ width: "20%" }}>
         <h1
           style={{
-            display: "flex",
-            justifyContent: "center",
             paddingTop: "10vh",
             marginBottom: "10vh",
+            marginLeft: "20vh",
           }}
         >
           Sign In
@@ -67,16 +63,23 @@ const SignIn = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </Form.Group>
-          <Button variant="outline-primary" type="submit">
+          <Button
+            variant="outline-primary"
+            type="submit"
+            style={{ marginLeft: "10vh", marginTop: "1vh" }}
+          >
             SignIn
           </Button>
           <br />
-          Are you a seller?Click{" "}
+          <br />
+          <br />
+          <b>Are you a seller?Click </b>
           <a style={{ color: "blue" }} href="/sellersignin">
             here
           </a>
           <br />
-          Are you a new user? To register Click{" "}
+          <br />
+          <b>Are you a new user? To register Click </b>
           <a style={{ color: "blue" }} href="/register">
             here
           </a>

@@ -1,5 +1,6 @@
 const User = require("../models/user.model");
 const jwt = require("jsonwebtoken");
+const Seller = require("../models/seller.model");
 
 exports.getUserInfo = async (req, res) => {
   try {
@@ -9,9 +10,11 @@ exports.getUserInfo = async (req, res) => {
         if (err) {
           throw err;
         } else {
-          const datainfo = await User.findById(info.user);
+          const datainfo =
+            (await User.findById(info.user)) ||
+            (await Seller.findById(info.user));
           if (!datainfo) {
-            return res.status(404).send("Document not found");
+            return res.status(404).send("User not found");
           } else {
             return res.send(datainfo);
           }

@@ -14,7 +14,6 @@ import axios from "axios";
 const Navigation = () => {
   const { loggedIn, getLoggedIn } = useContext(AuthContext);
   const allData = useContext(UserInfoContext);
-  console.log(allData);
 
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -45,7 +44,7 @@ const Navigation = () => {
         <Container>
           <Navbar.Brand
             href="/"
-            style={{ fontSize: 30, fontFamily: "cursive", marginLeft: "-10%" }}
+            style={{ fontSize: 30, fontFamily: "cursive", marginLeft: "-20%" }}
           >
             <img
               src={logo}
@@ -53,7 +52,8 @@ const Navigation = () => {
               style={{
                 minHeight: "30px",
                 maxHeight: "75px",
-                marginLeft: "65px",
+                marginLeft: "75px",
+                marginRight: "40px",
                 paddingTop: "10px",
                 paddingBottom: "10px",
               }}
@@ -63,7 +63,13 @@ const Navigation = () => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="m-auto">
-              <Form inline style={{ minWidth: "300px", maxWidth: "700px" }}>
+              <Form
+                inline
+                style={{
+                  minWidth: "500px",
+                  maxWidth: "700px",
+                }}
+              >
                 <Form.Control
                   type="text"
                   placeholder="Search"
@@ -85,7 +91,13 @@ const Navigation = () => {
                     title={<FontAwesomeIcon icon={faUser} />}
                     id="basic-nav-dropdown"
                   >
-                    <NavDropdown.Item>{allData.username}</NavDropdown.Item>
+                    {allData.username && (
+                      <NavDropdown.Item>{allData.username}</NavDropdown.Item>
+                    )}
+                    {allData.name && (
+                      <NavDropdown.Item>{allData.name}</NavDropdown.Item>
+                    )}
+
                     <NavDropdown.Divider />
                     <NavDropdown.Item href="#action/3.1">
                       Action
