@@ -12,7 +12,7 @@ import UserInfoContext from "../context/UserInfoContext";
 import axios from "axios";
 
 const Navigation = () => {
-  const { loggedIn } = useContext(AuthContext);
+  const { loggedIn, getLoggedIn } = useContext(AuthContext);
   const allData = useContext(UserInfoContext);
   console.log(allData);
 
@@ -26,6 +26,11 @@ const Navigation = () => {
   // return a loading message if isLoaded is false
   if (!isLoaded) {
     return <div>Loading...</div>;
+  }
+
+  async function logout() {
+    await axios.get("http://localhost:3030/auth/logout");
+    getLoggedIn();
   }
 
   return (
@@ -88,7 +93,13 @@ const Navigation = () => {
                     <NavDropdown.Item href="#action/3.2">
                       Another action
                     </NavDropdown.Item>
-                    <NavDropdown.Item>Logout</NavDropdown.Item>
+                    <NavDropdown.Item
+                      onClick={() => {
+                        logout();
+                      }}
+                    >
+                      Logout
+                    </NavDropdown.Item>
                   </NavDropdown>
                 </>
               </Nav>
