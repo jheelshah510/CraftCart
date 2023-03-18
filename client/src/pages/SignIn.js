@@ -21,12 +21,11 @@ const SignIn = () => {
       await axios.post("http://localhost:3030/auth/login", loginData, {
         withCredentials: true,
       });
+
+      alert("Sigin success");
       setTimeout(() => {
-        alert("Sigin success");
-        setTimeout(() => {
-          window.location = "/";
-        }, 1500);
-      });
+        window.location = "/";
+      }, 1500);
     } catch (err) {
       console.log(err);
       const tim = err;
