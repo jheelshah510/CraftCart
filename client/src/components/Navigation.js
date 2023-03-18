@@ -99,12 +99,38 @@ const Navigation = () => {
                     )}
 
                     <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.1">
-                      Action
-                    </NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">
-                      Another action
-                    </NavDropdown.Item>
+                    {allData.role === "buyer" && (
+                      <NavDropdown.Item href="#action/3.1">
+                        Your Profie
+                      </NavDropdown.Item>
+                    )}
+                    {allData.role === "admin" && (
+                      <NavDropdown.Item href="#action/3.1">
+                        Dashboard
+                      </NavDropdown.Item>
+                    )}
+                    {allData.role === "seller" && (
+                      <NavDropdown.Item href="#action/3.1">
+                        Dashboard
+                      </NavDropdown.Item>
+                    )}
+
+                    {allData.role === "buyer" && (
+                      <NavDropdown.Item href="#action/3.2">
+                        Your Orders
+                      </NavDropdown.Item>
+                    )}
+
+                    {allData.role === "seller" && (
+                      <NavDropdown.Item href="#action/3.2">
+                        Your Sales
+                      </NavDropdown.Item>
+                    )}
+                    {allData.role === "admin" && (
+                      <NavDropdown.Item href="#action/3.2">
+                        Approvals
+                      </NavDropdown.Item>
+                    )}
                     <NavDropdown.Item
                       onClick={() => {
                         logout();

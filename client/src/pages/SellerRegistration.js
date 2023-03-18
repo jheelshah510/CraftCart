@@ -43,6 +43,7 @@ const SellerRegistration = () => {
     } else {
       setSelectedOptions(selectedOptions.filter((option) => option !== value));
     }
+    console.log(selectedOptions.length);
   };
 
   const handleSubmitFile = async (e) => {
@@ -58,7 +59,10 @@ const SellerRegistration = () => {
     formData.append("address", address);
     formData.append("phoneNumber", phoneNumber);
     formData.append("pincode", pincode);
-    formData.append("selectedOptions", selectedOptions);
+    // formData.append("selectedOptions", selectedOptions);
+    for (let i = 0; i < selectedOptions.length; i++) {
+      formData.append("selectedOptions", selectedOptions[i]);
+    }
     for (let i = 0; i < images.length; i++) {
       formData.append("images", images[i]);
     }
@@ -187,8 +191,9 @@ const SellerRegistration = () => {
                   label={option.categoryName}
                   id={option.cid}
                   key={option.cid}
+                  value={option.categoryName}
+                  checked={selectedOptions.includes(option.categoryName)}
                   onChange={handleOptionChange}
-                  value={option._id}
                 />
               </div>
             )))
