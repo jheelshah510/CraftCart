@@ -3,8 +3,15 @@ const mongoose = require("mongoose");
 
 exports.addProduct = async (req, res) => {
   try {
-    const { productName, description, sellerId, sellerName, quantity } =
-      req.body;
+    const {
+      productName,
+      description,
+      sellerId,
+      quantity,
+      selectedOptions,
+      sellerName,
+      price,
+    } = req.body;
 
     const imageUrl = req.files.map((file) => file.location);
     console.log(imageUrl);
@@ -12,9 +19,11 @@ exports.addProduct = async (req, res) => {
       !productName ||
       !description ||
       !sellerId ||
-      !sellerName ||
       !quantity ||
-      !imageUrl
+      !imageUrl ||
+      !selectedOptions ||
+      !sellerName ||
+      !price
     ) {
       return res
         .status(400)
@@ -32,6 +41,8 @@ exports.addProduct = async (req, res) => {
       sellerName,
       quantity,
       imageUrl,
+      selectedOptions,
+      price,
     });
 
     newProduct.save((error, result) => {
@@ -46,4 +57,15 @@ exports.addProduct = async (req, res) => {
     console.log(err);
     res.status(500).send();
   }
+};
+
+exports.getSingleProduct = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    await Product.findById(productId, function (err, result) {
+      if (err) throw err;
+
+      res.send(result);
+    });
+  } catch (error) {}
 };

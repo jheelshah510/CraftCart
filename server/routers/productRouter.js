@@ -6,9 +6,11 @@ const {
   deleteProduct,
   modifyProduct,
   getProduct,
+  getSingleProduct,
 } = require("../controllers/product.controller");
 
 router.post("/add", uploadS3.array("images"), addProduct);
+router.get("/:id", getSingleProduct);
 // router.get("/get", getProduct);
 
 module.exports = router;

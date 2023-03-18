@@ -10,8 +10,7 @@ const sellerSchema = new mongoose.Schema({
   pincode: { type: Number, required: true },
   imageUrl: { type: Array, required: true },
   selectedOptions: { type: Array, required: true },
-  isSeller: { type: Boolean, default: true, required: true },
-  isAdmin: { type: Boolean, default: false, required: true },
+  role: { type: String, default: "seller", required: true },
 });
 
 const Seller = mongoose.model("seller", sellerSchema);
