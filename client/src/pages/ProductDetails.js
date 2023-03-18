@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
-import one from "../components/1.png";
-import two from "../components/2.png";
-import three from "../components/3.png";
-import four from "../components/4.png";
-import five from "../components/5.png";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMinus,
@@ -19,6 +15,8 @@ import axios from "axios";
 const ProductDetails = () => {
   const [product, setProduct] = useState({});
   const { id } = useParams();
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedImage, setSelectedImage] = useState("");
 
   const [amount, setAmount] = useState("");
 
@@ -30,19 +28,10 @@ const ProductDetails = () => {
     setAmount(amount + 1);
   };
 
-  const imgs = [
-    { id: 0, value: one },
-    { id: 1, value: two },
-    { id: 2, value: three },
-    { id: 3, value: four },
-    { id: 4, value: five },
-  ];
-
-  const [wordData, setWordData] = useState(imgs[0]);
   const handleClick = (index) => {
     console.log(index);
-    const wordSlider = imgs[index];
-    setWordData(wordSlider);
+    const wordSlider = product.imageUrl[index];
+    setSelectedImage(wordSlider);
   };
 
   useEffect(() => {
@@ -51,7 +40,9 @@ const ProductDetails = () => {
       .then((response) => response.data)
       .then((data) => setProduct(data))
       .catch((error) => console.error(error));
-  });
+
+    setIsLoading(false);
+  }, [id]);
 
   return (
     <div>
@@ -66,22 +57,23 @@ const ProductDetails = () => {
       <div className="super" style={{ marginLeft: "45vh", marginTop: "1vh" }}>
         <div className="main">
           <img
-            src={wordData.value}
+            src={selectedImage}
             style={{ height: "50vh" }}
             alt="An Alt Text"
           />
           <div className="flex_row">
-            {imgs.map((data, i) => (
-              <div className="thumbnail" key={i}>
-                <img
-                  className={wordData.id === i ? "clicked" : ""}
-                  src={data.value}
-                  onClick={() => handleClick(i)}
-                  style={{ height: "10vh" }}
-                  alt="An Alt Text"
-                />
-              </div>
-            ))}
+            {product.imageUrl &&
+              product.imageUrl.map((imageUrl, index) => (
+                <div className="thumbnail" key={index}>
+                  <img
+                    src={imageUrl}
+                    alt={product.productName}
+                    onClick={() => handleClick(index)}
+                    className={selectedImage === index ? "clicked" : ""}
+                    style={{ height: "10vh" }}
+                  />
+                </div>
+              ))}
           </div>
         </div>
         <div className="details">
