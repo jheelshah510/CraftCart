@@ -116,11 +116,7 @@ router.get("/loggedIn", (req, res) => {
     const token = req.cookies.token;
     if (!token) return res.json(false);
 
-    jwt.verify(token, process.env.JWT_SECRET, {}, (err, info) => {
-      if (err) throw err;
-      res.json(info);
-    });
-
+    jwt.verify(token, process.env.JWT_SECRET);
     res.send(true);
   } catch (err) {
     console.log(err);

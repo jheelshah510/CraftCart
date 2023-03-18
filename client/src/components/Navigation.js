@@ -1,17 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import NavDropdown from "react-bootstrap/NavDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 import logo from "../CraftCart.png";
 import AuthContext from "../context/AuthContext";
+import UserInfoContext from "../context/UserInfoContext";
+import axios from "axios";
 
 const Navigation = () => {
-  const { loggedIn, userName } = useContext(AuthContext);
-  console.log(userName);
+  const { loggedIn } = useContext(AuthContext);
+  const allData = useContext(UserInfoContext);
+  console.log(allData);
+
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // simulate a delay of 2 seconds before setting isLoaded to true
+  setTimeout(() => {
+    setIsLoaded(true);
+  }, 2000);
+
+  // return a loading message if isLoaded is false
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <>
       <Navbar
@@ -60,17 +76,20 @@ const Navigation = () => {
             {loggedIn && (
               <Nav className="mr-sm-4">
                 <>
-                <NavDropdown title={<FontAwesomeIcon icon={faUser} />} id="basic-nav-dropdown">
-              <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
-              </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
-              </NavDropdown.Item>
-            </NavDropdown>
+                  <NavDropdown
+                    title={<FontAwesomeIcon icon={faUser} />}
+                    id="basic-nav-dropdown"
+                  >
+                    <NavDropdown.Item>{allData.username}</NavDropdown.Item>
+                    <NavDropdown.Divider />
+                    <NavDropdown.Item href="#action/3.1">
+                      Action
+                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#action/3.2">
+                      Another action
+                    </NavDropdown.Item>
+                    <NavDropdown.Item>Logout</NavDropdown.Item>
+                  </NavDropdown>
                 </>
               </Nav>
             )}
