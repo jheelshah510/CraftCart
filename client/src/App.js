@@ -21,41 +21,46 @@ function App() {
   return (
     <>
       <AuthContextProvider>
-        <BrowserRouter>
-          <UserInfoContextProvider>
+        <UserInfoContextProvider>
+          <BrowserRouter>
             <Route exact path="/" component={Navigation} />
-          </UserInfoContextProvider>
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/sellersignin" component={SellersignIn} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/productdetails" component={ProductDetails} />
-          <Route
-            exact
-            path="/sellerregistration"
-            component={SellerRegistration}
-          />
-          <Route
-            exact
-            path="/sellerdashcustomerorder"
-            component={SellerDashCustomerOrder}
-          />
-          <Route
-            exact
-            path="/sellerdashproducts"
-            component={SellerDashProducts}
-          />
-          <Route
-            exact
-            path="/selleraccountinfo"
-            component={SellerAccountInfo}
-          />
-          <Route exact path="/newproductform" component={NewProductForm} />
-          <Route
-            exact
-            path="/productorderdetails"
-            component={ProductOrderDetails}
-          />
-        </BrowserRouter>
+
+            <Route exact path="/signin" component={SignIn} />
+            <Route exact path="/sellersignin" component={SellersignIn} />
+            <Route exact path="/register" component={Register} />
+            <Route
+              exact
+              path="/productdetails/:id"
+              component={ProductDetails}
+            />
+            <Route
+              exact
+              path="/sellerregistration"
+              component={SellerRegistration}
+            />
+            <Route
+              exact
+              path="/sellerdashcustomerorder"
+              component={SellerDashCustomerOrder}
+            />
+            <Route
+              exact
+              path="/sellerdashproducts"
+              component={SellerDashProducts}
+            />
+            <Route
+              exact
+              path="/selleraccountinfo"
+              component={SellerAccountInfo}
+            />
+            <Route exact path="/newproductform" component={NewProductForm} />
+            <Route
+              exact
+              path="/productorderdetails"
+              component={ProductOrderDetails}
+            />
+          </BrowserRouter>
+        </UserInfoContextProvider>
       </AuthContextProvider>
     </>
   );
