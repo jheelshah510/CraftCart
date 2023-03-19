@@ -29,8 +29,6 @@ const SellerDashProducts = () => {
     return <div>Loading...</div>;
   }
 
-  console.log(products.indexOf());
-
   return (
     <div>
       <SellerNavigation />
@@ -56,7 +54,7 @@ const SellerDashProducts = () => {
           <tbody>
             {products.map((product) => (
               <tr>
-                <th scope="row">{product.index}</th>
+                <th scope="row">{products.indexOf(product) + 1}</th>
                 <td>{product.productName}</td>
                 <td>
                   <Button variant="outline-primary" type="submit">

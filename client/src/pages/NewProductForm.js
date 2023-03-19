@@ -22,7 +22,7 @@ const NewProductForm = () => {
   // simulate a delay of 2 seconds before setting isLoaded to true
   setTimeout(() => {
     setIsLoaded(true);
-  }, 2000);
+  }, 1000);
 
   // return a loading message if isLoaded is false
   if (!isLoaded) {
