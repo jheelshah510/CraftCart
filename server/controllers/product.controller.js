@@ -84,7 +84,21 @@ exports.deleteProduct = async (req, res) => {
 
     res.json({ msg: "Product removed" });
   } catch (error) {
-    console.error(err.message);
+    console.error(error.message);
+    res.status(500).send("Server Error");
+  }
+};
+
+exports.getAllSellerProducts = (req, res) => {
+  try {
+    const sellerId = req.params.sellerId;
+
+    Product.find({ sellerId: sellerId }).exec((err, results) => {
+      if (err) throw err;
+      res.send(results);
+    });
+  } catch (error) {
+    console.error(error.message);
     res.status(500).send("Server Error");
   }
 };

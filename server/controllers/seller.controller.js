@@ -166,3 +166,17 @@ exports.checkLoginSeller = (req, res) => {
     res.json(false);
   }
 };
+
+exports.getSellerInfo = async (req, res) => {
+  try {
+    Seller.findById(req.params.id).exec((error, seller) => {
+      if (error) return res.status(400).json({ error });
+      if (seller) {
+        res.status(200).json({ seller });
+      }
+    });
+  } catch (error) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};

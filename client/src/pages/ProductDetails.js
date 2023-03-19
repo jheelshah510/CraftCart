@@ -14,11 +14,8 @@ import axios from "axios";
 
 const ProductDetails = () => {
   const [isLoaded, setIsLoaded] = useState(false);
-
-  // simulate a delay of 2 seconds before setting isLoaded to true
   const [product, setProduct] = useState({});
   const { id } = useParams();
-  const [isLoading, setIsLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState("");
 
   const [amount, setAmount] = useState(1);
@@ -28,7 +25,6 @@ const ProductDetails = () => {
       .then((response) => response.data)
       .then((data) => setProduct(data))
       .catch((error) => console.error(error));
-    setIsLoading(false);
   }, [id]);
   useEffect(() => {
     setTimeout(() => {
@@ -89,9 +85,9 @@ const ProductDetails = () => {
           </div>
         </div>
         <div className="details">
-          <h2>{product.productName}</h2>
+          <h2 style={{ width: "70%" }}>{product.productName}</h2>
           <h3>Price :&#x20B9;{product.price}</h3>
-          <div style={{ maxWidth: "50%", marginBottom: "2px" }}>
+          <div style={{ maxWidth: "70%", marginBottom: "2px" }}>
             {product.description}
           </div>
           <h4>Seller : {product.sellerName}</h4>

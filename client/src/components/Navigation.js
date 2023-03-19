@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Form from "react-bootstrap/Form";
 import Nav from "react-bootstrap/Nav";
@@ -16,10 +16,15 @@ const Navigation = () => {
   const allData = useContext(UserInfoContext);
 
   const [isLoaded, setIsLoaded] = useState(false);
+  const [sellerAccountProfileUrl, setSellerAccountProfileUrl] = useState();
 
   // simulate a delay of 2 seconds before setting isLoaded to true
   setTimeout(() => {
     setIsLoaded(true);
+
+    if (loggedIn) {
+      setSellerAccountProfileUrl(`/selleraccountinfo/${allData._id}`);
+    }
   }, 1000);
 
   // return a loading message if isLoaded is false
@@ -110,7 +115,7 @@ const Navigation = () => {
                       </NavDropdown.Item>
                     )}
                     {allData.role === "seller" && (
-                      <NavDropdown.Item href="#action/3.1">
+                      <NavDropdown.Item href={sellerAccountProfileUrl}>
                         Dashboard
                       </NavDropdown.Item>
                     )}
