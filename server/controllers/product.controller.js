@@ -69,3 +69,22 @@ exports.getSingleProduct = async (req, res) => {
     });
   } catch (error) {}
 };
+
+exports.deleteProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+    if (!product) {
+      return res.status(404).json({ msg: "Product not found" });
+    }
+    const { sellerId } = req.body;
+    if (Product.sellerId !== sellerId) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+    await Product.remove();
+
+    res.json({ msg: "Product removed" });
+  } catch (error) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+};
