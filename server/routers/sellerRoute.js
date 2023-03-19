@@ -5,6 +5,7 @@ const {
   loginSeller,
   logoutSeller,
   checkLoginSeller,
+  getSellerInfo,
 } = require("../controllers/seller.controller");
 const { uploadS3 } = require("../middleware/image");
 
@@ -19,5 +20,7 @@ router.get("/logout", logoutSeller);
 
 //check loggedIn
 router.get("/loggedIn", checkLoginSeller);
+
+router.get("/getInfo/:id", getSellerInfo);
 
 module.exports = router;

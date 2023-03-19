@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import UserInfoContext from "../context/UserInfoContext";
+import { useHistory } from "react-router-dom";
+
 import axios from "axios";
 
 const NewProductForm = () => {
@@ -14,6 +16,8 @@ const NewProductForm = () => {
   const allData = useContext(UserInfoContext);
 
   const [isLoaded, setIsLoaded] = useState(false);
+
+  const history = useHistory();
 
   // simulate a delay of 2 seconds before setting isLoaded to true
   setTimeout(() => {
@@ -69,7 +73,6 @@ const NewProductForm = () => {
           setPname("");
           setPdescription("");
           setStocks("");
-
           setImages([]);
           setSelectedOptions([]);
         });
@@ -77,7 +80,7 @@ const NewProductForm = () => {
       alert("Product Added Succesfully");
       setTimeout(() => {
         window.location = "/";
-      }, 1500);
+      }, 500);
       for (var pair of formData.entries()) {
         console.log(pair[0] + " - " + pair[1]);
       }
@@ -88,13 +91,17 @@ const NewProductForm = () => {
     }
   };
 
+  const handleBack = () => {
+    history.goBack();
+  };
+
   return (
     <div>
       <Form
         style={{
           width: "75vh",
           marginLeft: "65vh",
-          marginTop: "7vh",
+          marginTop: "3vh",
         }}
         onSubmit={handleSubmitForm}
         className="shadow-lg p-5 mb-5 bg-white rounded"
@@ -180,13 +187,34 @@ const NewProductForm = () => {
           />
         </Form.Group>
 
-        <Button
-          variant="primary"
-          type="submit"
-          style={{ marginLeft: "40%", marginTop: "2vh" }}
-        >
-          Add Product
-        </Button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Button
+            variant="primary"
+            type="submit"
+            style={{
+              marginTop: "2vh",
+              marginLeft: "20%",
+              display: "inline-block",
+              textAlign: "center",
+            }}
+          >
+            Add Product
+          </Button>
+          <Button
+            variant="danger"
+            style={{
+              marginTop: "2vh",
+              marginRight: "30%",
+              textAlign: "center",
+              display: "inline-block",
+            }}
+            onClick={() => {
+              handleBack();
+            }}
+          >
+            Discard
+          </Button>
+        </div>
       </Form>
     </div>
   );

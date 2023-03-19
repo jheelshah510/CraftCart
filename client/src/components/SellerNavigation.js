@@ -1,11 +1,35 @@
-import React from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import AuthContext from "../context/AuthContext";
+import UserInfoContext from "../context/UserInfoContext";
 import logo from "../CraftCart.png";
 
 const SellerNavigation = () => {
-  
+  const { getLoggedIn } = useContext(AuthContext);
+  const allData = useContext(UserInfoContext);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  async function logout() {
+    await axios.get("http://localhost:3030/auth/logout");
+    getLoggedIn();
+    window.location = "/";
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 500);
+  }, [isLoaded]);
+
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
+
+  const sellerAccountProfileUrl = `/selleraccountinfo/${allData._id}`;
+
   return (
     <>
       <Navbar
@@ -18,7 +42,12 @@ const SellerNavigation = () => {
         <Container>
           <Navbar.Brand
             href="/"
-            style={{ fontSize: 30, fontFamily: "cursive", marginLeft: "-10%", marginRight: "10%" }}
+            style={{
+              fontSize: 30,
+              fontFamily: "cursive",
+              marginLeft: "-10%",
+              marginRight: "10%",
+            }}
           >
             <img
               src={logo}
@@ -37,31 +66,37 @@ const SellerNavigation = () => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-sm-4">
               <>
-                <Nav.Link href="#">
+                <Nav.Link href={sellerAccountProfileUrl}>
                   Account Details
                 </Nav.Link>
               </>
             </Nav>
             <Nav className="mr-sm-4">
               <>
-                <Nav.Link href="#">Products</Nav.Link>
+                <Nav.Link href="/sellerdashproducts">Products</Nav.Link>
               </>
             </Nav>
             <Nav className="mr-sm-4">
               <>
-                <Nav.Link href="#">Add New Product</Nav.Link>
+                <Nav.Link href="/newproductform">Add New Product</Nav.Link>
               </>
             </Nav>
             <Nav className="mr-sm-4">
               <>
-                <Nav.Link href="#">Customer Order</Nav.Link>
+                <Nav.Link href="/productorderdetails">Customer Order</Nav.Link>
               </>
             </Nav>
             <Nav className="mr-sm-4">
-                <>
-                  <Nav.Link href="#">Logout</Nav.Link>
-                </>
-              </Nav>
+              <>
+                <Nav.Link
+                  onClick={() => {
+                    logout();
+                  }}
+                >
+                  Logout
+                </Nav.Link>
+              </>
+            </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
