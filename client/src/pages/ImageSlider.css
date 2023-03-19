@@ -1,30 +1,30 @@
-.main{
-    text-align: left;
-    margin-top:30px ;
-    margin-left:30px;
-    margin-right:30px;
-  }
-  .flex_row{
-    justify-content: left;
-    display: flex;
-    padding-top: 20px;
-  }
-  
-.thumbnail{
+.main {
+  text-align: left;
+  margin-top: 30px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.flex_row {
+  justify-content: left;
+  display: flex;
+  padding-top: 20px;
+}
+
+.thumbnail {
   padding-left: 2px;
 }
-.clicked{
+.clicked {
   border: 5px solid black;
 }
-.details{
-    margin-top: 30px;
+.details {
+  margin-top: 30px;
 }
-.super{
-    display: flex;
+.super {
+  display: flex;
 }
-.increase-decrease{
-    display: flex;
+.increase-decrease {
+  display: flex;
 }
-.add-cart{
-    margin-top: 10px;
+.add-cart {
+  margin-top: 10px;
 }

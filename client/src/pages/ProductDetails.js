@@ -33,7 +33,7 @@ const ProductDetails = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
-      setSelectedImage(product.imageUrl[3]);
+      setSelectedImage(product.imageUrl[product.imageUrl.length - 1]);
     }, 1000);
   }, [isLoaded]);
 
@@ -82,7 +82,7 @@ const ProductDetails = () => {
                     alt={product.productName}
                     onClick={() => handleClick(index)}
                     className={selectedImage === index ? "clicked" : ""}
-                    style={{ height: "10vh" }}
+                    style={{ height: "10vh", cursor: "pointer" }}
                   />
                 </div>
               ))}
