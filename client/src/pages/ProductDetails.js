@@ -13,12 +13,34 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const ProductDetails = () => {
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  // simulate a delay of 2 seconds before setting isLoaded to true
   const [product, setProduct] = useState({});
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState("");
 
   const [amount, setAmount] = useState("");
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3030/product/${id}`)
+      .then((response) => response.data)
+      .then((data) => setProduct(data))
+      .catch((error) => console.error(error));
+    setIsLoading(false);
+  }, [id]);
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+      setSelectedImage(product.imageUrl[3]);
+    }, 1000);
+  }, [isLoaded]);
+
+  // return a loading message if isLoaded is false
+  if (!isLoaded) {
+    return <div>Loading...</div>;
+  }
 
   const setDecrease = () => {
     amount > 1 ? setAmount(amount - 1) : setAmount(1);
@@ -33,16 +55,6 @@ const ProductDetails = () => {
     const wordSlider = product.imageUrl[index];
     setSelectedImage(wordSlider);
   };
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:3030/product/${id}`)
-      .then((response) => response.data)
-      .then((data) => setProduct(data))
-      .catch((error) => console.error(error));
-
-    setIsLoading(false);
-  }, [id]);
 
   return (
     <div>
