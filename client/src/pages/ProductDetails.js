@@ -18,7 +18,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
 
-  const [amount, setAmount] = useState("");
+  const [amount, setAmount] = useState(1);
   useEffect(() => {
     axios
       .get(`http://localhost:3030/product/${id}`)
