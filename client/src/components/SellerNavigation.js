@@ -29,6 +29,7 @@ const SellerNavigation = () => {
   }
 
   const sellerAccountProfileUrl = `/selleraccountinfo/${allData._id}`;
+  const sellerAccountProducts = `/sellerdashproducts/${allData._id}`;
 
   return (
     <>
@@ -73,7 +74,7 @@ const SellerNavigation = () => {
             </Nav>
             <Nav className="mr-sm-4">
               <>
-                <Nav.Link href="/sellerdashproducts">Products</Nav.Link>
+                <Nav.Link href={sellerAccountProducts}>Products</Nav.Link>
               </>
             </Nav>
             <Nav className="mr-sm-4">
