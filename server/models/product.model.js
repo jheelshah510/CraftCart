@@ -12,6 +12,7 @@ const productSchema = new mongoose.Schema({
   selectedOptions: { type: Array, required: true },
   isApproved: { type: Boolean, default: false, required: true },
   isPublish: { type: Boolean, default: false, required: true },
+  createdAt: { type: Date, default: Date.now },
 });
 
 const Product = mongoose.model("product", productSchema);
