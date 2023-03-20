@@ -5,6 +5,7 @@ import Button from "react-bootstrap/Button";
 import SellerNavigation from "../components/SellerNavigation";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 const SellerDashProducts = () => {
   const { sellerId } = useParams();
@@ -26,7 +27,7 @@ const SellerDashProducts = () => {
   }, [isLoaded]);
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
