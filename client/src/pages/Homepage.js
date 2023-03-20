@@ -72,32 +72,50 @@ const Homepage = () => {
         </div>
 
         <div>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style={{height: "300px"}}>
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner" style={{height: "300px"}} >
-    <div class="carousel-item active">
-      <img src={one} alt="..." />
-    </div>
-    <div class="carousel-item">
-      <img src={two} class="d-block w-100" alt="..." />
-    </div>
-    <div class="carousel-item">
-      <img src={three} class="d-block w-100" alt="..." />
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+
+        <Carousel fade style={{float: "left", width: "100%", height: "200px"}}>
+      <Carousel.Item style={{height: "200px"}}>
+        <img
+          className="d-block w-100"
+          src={one}
+          alt="First slide"
+          style={{height: "200px"}}
+        />
+      </Carousel.Item>
+      <Carousel.Item style={{height: "200px"}}>
+        <img
+          className="d-block w-100"
+          src={two}
+          alt="Second slide"
+          style={{height: "200px"}}
+        />
+      </Carousel.Item>
+      <Carousel.Item style={{height: "200px"}}>
+        <img
+          className="d-block w-100"
+          src={three}
+          alt="Third slide"
+          style={{height: "200px"}}
+        />
+      </Carousel.Item>
+      <Carousel.Item style={{height: "200px"}}>
+        <img
+          className="d-block w-100"
+          src={four}
+          alt="Four slide"
+          style={{height: "200px"}}
+        />
+      </Carousel.Item>
+      <Carousel.Item style={{height: "200px"}}>
+        <img
+          className="d-block w-100"
+          src={five}
+          alt="Five slide"
+          style={{height: "200px"}}
+        />
+      </Carousel.Item>
+    </Carousel>
+
         </div>
 
 
