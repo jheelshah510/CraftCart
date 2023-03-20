@@ -13,6 +13,7 @@ import SellerAccountInfo from "./pages/SellerAccountInfo";
 import NewProductForm from "./pages/NewProductForm";
 import ProductOrderDetails from "./pages/ProductOrderDetails";
 import Cart from "./pages/Cart";
+import Homepage from "./pages/Homepage";
 
 axios.defaults.withCredentials = true;
 
@@ -20,7 +21,7 @@ function App() {
   return (
     <>
       <BrowserRouter>
-        <Route exact path="/" component={Navigation} />
+        <Route exact path="/" component={Homepage} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/sellersignin" component={SellersignIn} />
