@@ -6,6 +6,7 @@ import Navbar from "react-bootstrap/Navbar";
 import AuthContext from "../context/AuthContext";
 import UserInfoContext from "../context/UserInfoContext";
 import logo from "../CraftCart.png";
+import Loading from "./Loading";
 
 const SellerNavigation = () => {
   const { getLoggedIn } = useContext(AuthContext);
@@ -25,7 +26,7 @@ const SellerNavigation = () => {
   }, [isLoaded]);
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const sellerAccountProfileUrl = `/selleraccountinfo/${allData._id}`;
