@@ -3,14 +3,18 @@ import { faPenToSquare, faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "react-bootstrap/Button";
 import SellerNavigation from "../components/SellerNavigation";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../components/Loading";
+import EditProductModal from "../components/EditProductModal";
 
 const SellerDashProducts = () => {
   const { sellerId } = useParams();
   const [products, setProducts] = useState([]);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     axios
@@ -29,6 +33,35 @@ const SellerDashProducts = () => {
   if (!isLoaded) {
     return <Loading />;
   }
+
+  const modalShow = (product) => {
+    setEditingProduct(product);
+    setShowModal(true);
+  };
+
+  const handleSaveProduct = (updatedProduct) => {
+    setProducts((prevProducts) =>
+      prevProducts.map((p) =>
+        p._id === updatedProduct._id ? updatedProduct : p
+      )
+    );
+    setShowModal(false);
+  };
+
+  const handleCancelEdit = () => {
+    setShowModal(false);
+  };
+
+  const handleProductDelete = async (id) => {
+    try {
+      await axios
+        .delete(`http://localhost:3030/product/delete/${id}`, sellerId)
+        .then((response) => alert("Product deleted succesfully"));
+      history.go(0);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <div>
@@ -58,12 +91,22 @@ const SellerDashProducts = () => {
                 <th scope="row">{products.indexOf(product) + 1}</th>
                 <td>{product.productName}</td>
                 <td>
-                  <Button variant="outline-primary" type="submit">
+                  <Button
+                    variant="outline-primary"
+                    type="submit"
+                    onClick={() => {
+                      modalShow(product);
+                    }}
+                  >
                     Edit
                   </Button>
                 </td>
                 <td>
-                  <Button variant="outline-danger" type="submit">
+                  <Button
+                    variant="outline-danger"
+                    type="submit"
+                    onClick={() => handleProductDelete(product._id)}
+                  >
                     Delete
                   </Button>
                 </td>
@@ -71,6 +114,15 @@ const SellerDashProducts = () => {
             ))}
           </tbody>
         </table>
+        {showModal && (
+          <div>
+            <EditProductModal
+              product={editingProduct}
+              onCancel={handleCancelEdit}
+              onSave={handleSaveProduct}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

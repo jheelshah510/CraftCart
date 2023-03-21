@@ -1,0 +1,7 @@
+.custom-modal-style {
+  height: 80vh;
+}
+
+.my-modal {
+  min-width: 45%; /* Occupy the 90% of the screen width */
+}

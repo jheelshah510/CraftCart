@@ -80,7 +80,7 @@ exports.deleteProduct = async (req, res) => {
     if (Product.sellerId !== sellerId) {
       return res.status(401).json({ msg: "User not authorized" });
     }
-    await Product.remove();
+    await product.remove();
 
     res.json({ msg: "Product removed" });
   } catch (error) {
@@ -100,5 +100,35 @@ exports.getAllSellerProducts = (req, res) => {
   } catch (error) {
     console.error(error.message);
     res.status(500).send("Server Error");
+  }
+};
+
+exports.modifyProduct = async (req, res) => {
+  try {
+    const sellerId = req.params.sellerId;
+    const productId = req.params.id;
+    const { name, description, quantity, price } = req.body;
+    const imageUrl = req.files.map((file) => file.location);
+
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+    if (product.sellerId !== sellerId) {
+      return res.status(401).json({ msg: "User not authorized" });
+    }
+
+    product.productName = name;
+    product.description = description;
+    product.quantity = quantity;
+    product.price = price;
+    product.imageUrl = imageUrl;
+
+    await product.save();
+
+    res.json(product);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
   }
 };

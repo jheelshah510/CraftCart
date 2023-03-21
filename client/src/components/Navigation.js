@@ -10,6 +10,7 @@ import logo from "../CraftCart.png";
 import AuthContext from "../context/AuthContext";
 import UserInfoContext from "../context/UserInfoContext";
 import axios from "axios";
+import Loading from "./Loading";
 
 const Navigation = () => {
   const { loggedIn, getLoggedIn } = useContext(AuthContext);
@@ -29,7 +30,7 @@ const Navigation = () => {
 
   // return a loading message if isLoaded is false
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   async function logout() {
