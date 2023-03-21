@@ -1,5 +1,4 @@
 import "./App.css";
-import Navigation from "./components/Navigation";
 import { BrowserRouter, Route } from "react-router-dom";
 import axios from "axios";
 import SignIn from "./pages/SignIn";
@@ -14,6 +13,7 @@ import NewProductForm from "./pages/NewProductForm";
 import ProductOrderDetails from "./pages/ProductOrderDetails";
 import Cart from "./pages/Cart";
 import Homepage from "./pages/Homepage";
+import EditProductModal from "./components/EditProductModal";
 
 axios.defaults.withCredentials = true;
 
@@ -53,6 +53,7 @@ function App() {
           path="/productorderdetails"
           component={ProductOrderDetails}
         />
+        <Route exact path="/test" component={EditProductModal} />
       </BrowserRouter>
     </>
   );

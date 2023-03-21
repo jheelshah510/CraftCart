@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Loading from "../components/Loading";
 import SellerNavigation from "../components/SellerNavigation";
 
 const SellerAccountInfo = () => {
@@ -23,7 +24,7 @@ const SellerAccountInfo = () => {
   }, [isLoaded]);
 
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (

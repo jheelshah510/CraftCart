@@ -13,6 +13,7 @@ router.post("/add", uploadS3.array("images"), addProduct);
 router.get("/:id", getSingleProduct);
 router.delete("/delete/:id", deleteProduct);
 router.get("/seller/:sellerId/products", getAllSellerProducts);
+router.put("/edit/:sellerId/:id", uploadS3.array("images"), modifyProduct);
 // router.get("/get", getProduct);
 
 module.exports = router;
