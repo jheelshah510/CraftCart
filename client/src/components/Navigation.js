@@ -18,13 +18,18 @@ const Navigation = () => {
 
   const [isLoaded, setIsLoaded] = useState(false);
   const [sellerAccountProfileUrl, setSellerAccountProfileUrl] = useState();
+  const [buyerAccountProfileUrl, setBuyerAccountProfileUr] = useState();
 
   // simulate a delay of 2 seconds before setting isLoaded to true
   setTimeout(() => {
     setIsLoaded(true);
 
-    if (loggedIn) {
+    if (allData.role === "seller") {
       setSellerAccountProfileUrl(`/selleraccountinfo/${allData._id}`);
+    }
+
+    if (allData.role === "buyer") {
+      setBuyerAccountProfileUr(`/profile/${allData._id}`);
     }
   }, 1000);
 
@@ -106,7 +111,7 @@ const Navigation = () => {
 
                     <NavDropdown.Divider />
                     {allData.role === "buyer" && (
-                      <NavDropdown.Item href="#action/3.1">
+                      <NavDropdown.Item href={buyerAccountProfileUrl}>
                         Your Profie
                       </NavDropdown.Item>
                     )}

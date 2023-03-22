@@ -14,6 +14,7 @@ import ProductOrderDetails from "./pages/ProductOrderDetails";
 import Cart from "./pages/Cart";
 import Homepage from "./pages/Homepage";
 import EditProductModal from "./components/EditProductModal";
+import BuyerProfile from "./pages/BuyerProfile";
 
 axios.defaults.withCredentials = true;
 
@@ -54,6 +55,7 @@ function App() {
           component={ProductOrderDetails}
         />
         <Route exact path="/test" component={EditProductModal} />
+        <Route exact path="/profile/:id" component={BuyerProfile} />
       </BrowserRouter>
     </>
   );
