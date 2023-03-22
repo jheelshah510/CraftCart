@@ -15,6 +15,7 @@ import Cart from "./pages/Cart";
 import Homepage from "./pages/Homepage";
 import EditProductModal from "./components/EditProductModal";
 import BuyerProfile from "./pages/BuyerProfile";
+import SearchProduct from "./pages/SearchProduct";
 
 axios.defaults.withCredentials = true;
 
@@ -23,6 +24,7 @@ function App() {
     <>
       <BrowserRouter>
         <Route exact path="/" component={Homepage} />
+        <Route exact path="/searchproduct" component={SearchProduct} />
         <Route exact path="/cart" component={Cart} />
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/sellersignin" component={SellersignIn} />
