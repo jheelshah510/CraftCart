@@ -1,26 +1,34 @@
 import axios from "axios";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import Badge from "react-bootstrap/esm/Badge";
 import Button from "react-bootstrap/esm/Button";
 
 import Form from "react-bootstrap/Form";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import Loading from "../components/Loading";
 
 const BuyerProfile = () => {
   const { id } = useParams();
   const [isLoaded, setIsLoaded] = useState(false);
   const [buyerInfo, setBuyerInfo] = useState({});
+  const history = useHistory();
 
+  const [pNumber, setPnumber] = useState();
+  const [address, setAddress] = useState("");
+  const [pCode, setPcode] = useState();
   useEffect(() => {
     axios
       .get(`http://localhost:3030/userInfo/getBuyerInfo/${id}`)
       .then((response) => response.data)
-      .then((data) => setBuyerInfo(data))
-      .catch((error) => console.error(error));
+      .then((data) => {
+        setBuyerInfo(data);
+        setPnumber(data.buyer.phoneNumber);
+        setAddress(data.buyer.address);
+        setPcode(data.buyer.pincode);
+      })
 
-    console.log();
+      .catch((error) => console.error(error));
   }, [id]);
   useEffect(() => {
     setTimeout(() => {
@@ -31,6 +39,40 @@ const BuyerProfile = () => {
   if (!isLoaded) {
     return <Loading />;
   }
+  const handleBack = () => {
+    history.goBack();
+  };
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const updateBuyerInfo = {
+      address: address,
+      phoneNumber: pNumber,
+      pincode: pCode,
+    };
+
+    // const formData = new FormData();
+
+    // formData.append("address", address);
+    // formData.append("phoneNumber", pNumber);
+
+    // formData.append("pincode", pCode);
+
+    try {
+      await axios
+        .put(`http://localhost:3030/userinfo/updateInfo/${id}`, updateBuyerInfo)
+        .then((res) => {
+          if (res.data) {
+            alert("Profile update succesfully");
+            setTimeout(() => {
+              window.location = "/";
+            }, 800);
+          }
+        });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div>
@@ -41,6 +83,7 @@ const BuyerProfile = () => {
           marginTop: "5vh",
         }}
         className="shadow-lg p-5 mb-5 bg-white rounded"
+        onSubmit={handleSubmit}
       >
         <h1 style={{ display: "flex", justifyContent: "center" }}>
           User Profile
@@ -57,7 +100,13 @@ const BuyerProfile = () => {
 
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" />
+          <Form.Control
+            type="email"
+            placeholder="Enter email"
+            value={buyerInfo.buyer.email}
+            style={{ cursor: "not-allowed" }}
+            readOnly
+          />
         </Form.Group>
 
         <Form.Group className="mb-3">
@@ -74,28 +123,59 @@ const BuyerProfile = () => {
             placeholder="Enter Phone Number"
             name="ph-num"
             style={{ marginLeft: "3vw", width: "89%", marginTop: "-6.4vh" }}
+            value={pNumber}
+            onChange={(e) => setPnumber(e.target.value)}
           />
         </Form.Group>
 
-        <Form.Label>Categories</Form.Label>
-
         <Form.Group className="mb-3" controlId="formBasicAddress">
           <Form.Label>Address</Form.Label>
-          <Form.Control type="text" placeholder="Enter Address" />
+          <Form.Control
+            type="text"
+            placeholder="Enter Address"
+            value={address}
+            onChange={(e) => setAddress(e.target.value)}
+          />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPinCode">
           <Form.Label>PinCode</Form.Label>
-          <Form.Control type="number" placeholder="Enter Pin Code" />
+          <Form.Control
+            type="number"
+            placeholder="Enter Pin Code"
+            value={pCode}
+            onChange={(e) => setPcode(e.target.value)}
+          />
         </Form.Group>
 
-        <Button
-          variant="primary"
-          type="submit"
-          style={{ marginLeft: "40%", marginTop: "2vh" }}
-        >
-          Register
-        </Button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <Button
+            variant="primary"
+            type="submit"
+            style={{
+              marginTop: "2vh",
+              marginLeft: "25%",
+              display: "inline-block",
+              textAlign: "center",
+            }}
+          >
+            Save
+          </Button>
+          <Button
+            variant="danger"
+            style={{
+              marginTop: "2vh",
+              marginRight: "30%",
+              textAlign: "center",
+              display: "inline-block",
+            }}
+            onClick={() => {
+              handleBack();
+            }}
+          >
+            Discard
+          </Button>
+        </div>
       </Form>
     </div>
   );
