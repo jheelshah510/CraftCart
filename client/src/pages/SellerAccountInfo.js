@@ -30,8 +30,11 @@ const SellerAccountInfo = () => {
   return (
     <div>
       <SellerNavigation />
-      <div style={{ width: "50%", marginTop: "10%", marginLeft: "25%" }}>
-        <table className="table" style={{ textAlign: "center" }}>
+      <div style={{ width: "100%", height: "100%" }}>
+        <table
+          className="table"
+          style={{ textAlign: "center", height: "90vh" }}
+        >
           <thead className="thead-dark">
             <tr>
               <th scope="col" colSpan="2">

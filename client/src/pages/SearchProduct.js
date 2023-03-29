@@ -1,42 +1,169 @@
-import React from 'react'
-import Navigation from '../components/Navigation'
-import one from "../components/1.png";
-import two from "../components/2.png";
-import three from "../components/3.png";
-import four from "../components/4.png";
-import five from "../components/5.png";
+import React from "react";
+import Navigation from "../components/Navigation";
+import { useEffect } from "react";
+import axios from "axios";
+import { useState } from "react";
+import Loading from "../components/Loading";
 
 const SearchProduct = () => {
+  const [products, setProducts] = useState([]);
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3030/product/getAllProducts")
+      .then((response) => response.data)
+      .then((data) => setProducts(data))
+      .catch((error) => console.error(error));
+  }, []);
+  console.log(products);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoaded(true);
+    }, 1000);
+  }, [isLoaded]);
+
+  if (!isLoaded) {
+    return <Loading />;
+  }
+
   return (
     <div>
-        <Navigation />
-        <div style={{display: 'flex'}}>
-            <div style={{border: '1px solid black', width: '20%', margin: '1%'}}>
-                <h3>Filters</h3>
-            </div>
-            <div style={{margin: '1%', width: '70%'}}>
-                <div className='singleproduct' style={{display: 'flex', margin: '1%', border: '1px solid black'}}>
-                    <img src={one} style={{width: '120px', height: '160px', margin: '1%'}}  />
-                    <div style={{margin: '1%'}}>
-                        <h3>Product Name</h3>
-                    </div>
-                </div>
-                <div className='singleproduct' style={{display: 'flex', margin: '1%', border: '1px solid black'}}>
-                    <img src={two} style={{width: '120px', height: '160px', margin: '1%'}}  />
-                    <div style={{margin: '1%'}}>
-                        <h3>Product Name</h3>
-                    </div>
-                </div>
-                <div className='singleproduct' style={{display: 'flex', margin: '1%', border: '1px solid black'}}>
-                    <img src={three} style={{width: '120px', height: '160px', margin: '1%'}}  />
-                    <div style={{margin: '1%'}}>
-                        <h3>Product Name</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-  )
-}
+      <Navigation />
+      <div style={{ display: "flex" }}>
+        <div
+          style={{
+            border: "1px solid black",
+            width: "20%",
+            height: "500px",
+            margin: "1%",
+          }}
+        >
+          <h2 style={{ marginLeft: "5%", marginTop: "6%" }}>
+            <b>Filters</b>
+          </h2>
+          <h3 style={{ margin: "5%" }}>Categories</h3>
+          <input
+            style={{ marginLeft: "5%" }}
+            type="checkbox"
+            id=""
+            name=""
+            value=""
+          />
+          <label style={{ marginLeft: "2%" }} for="vehicle1">
+            {" "}
+            Jute
+          </label>
+          <input
+            style={{ marginLeft: "5%" }}
+            type="checkbox"
+            id=""
+            name=""
+            value=""
+          />
+          <label style={{ marginLeft: "2%" }} for="vehicle1">
+            {" "}
+            Pottery
+          </label>
+          <input
+            style={{ marginLeft: "5%" }}
+            type="checkbox"
+            id=""
+            name=""
+            value=""
+          />
+          <label style={{ marginLeft: "2%" }} for="vehicle1">
+            {" "}
+            Leather
+          </label>
+          <br />
 
-export default SearchProduct
+          <input
+            style={{ marginLeft: "5%" }}
+            type="checkbox"
+            id=""
+            name=""
+            value=""
+          />
+          <label style={{ marginLeft: "2%" }} for="vehicle1">
+            {" "}
+            Brass
+          </label>
+          <input
+            style={{ marginLeft: "5%" }}
+            type="checkbox"
+            id=""
+            name=""
+            value=""
+          />
+          <label style={{ marginLeft: "2%" }} for="vehicle1">
+            {" "}
+            Paintings
+          </label>
+          <input
+            style={{ marginLeft: "5%" }}
+            type="checkbox"
+            id=""
+            name=""
+            value=""
+          />
+          <label style={{ marginLeft: "2%" }} for="vehicle1">
+            {" "}
+            Clothing
+          </label>
+          <br />
+          <input
+            style={{ marginLeft: "5%" }}
+            type="checkbox"
+            id=""
+            name=""
+            value=""
+          />
+          <label style={{ marginLeft: "2%" }} for="vehicle1">
+            {" "}
+            Carpet Weaving
+          </label>
+          <input
+            style={{ marginLeft: "5%" }}
+            type="checkbox"
+            id=""
+            name=""
+            value=""
+          />
+          <label style={{ marginLeft: "2%" }} for="vehicle1">
+            {" "}
+            Woodwork
+          </label>
+          <br />
+        </div>
+        <div style={{ margin: "1%", width: "70%" }}>
+          {products.map((product) => (
+            <div
+              className="singleproduct"
+              style={{
+                display: "flex",
+                margin: "1%",
+                border: "1px solid black",
+              }}
+            >
+              <img
+                src={product.imageUrl[0]}
+                style={{ width: "120px", height: "160px", margin: "1%" }}
+              />
+              <div style={{ margin: "1%" }}>
+                <h4>{product.productName}</h4>
+
+                <h3 style={{ position: "absolute" }}>
+                  &#x20B9;{product.price}
+                </h3>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default SearchProduct;

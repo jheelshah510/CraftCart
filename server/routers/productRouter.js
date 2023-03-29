@@ -7,9 +7,11 @@ const {
   modifyProduct,
   getSingleProduct,
   getAllSellerProducts,
+  getAllProducts,
   find,
 } = require("../controllers/product.controller");
 
+router.get("/getAllProducts", getAllProducts);
 router.post("/add", uploadS3.array("images"), addProduct);
 router.get("/:id", getSingleProduct);
 router.delete("/delete/:id", deleteProduct);
