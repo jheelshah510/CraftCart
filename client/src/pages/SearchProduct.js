@@ -5,10 +5,11 @@ import axios from "axios";
 import { useState } from "react";
 import Loading from "../components/Loading";
 
-const SearchProduct = () => {
-  const [products, setProducts] = useState([]);
+const SearchProduct = ({ products }) => {
+  const [prds, setProducts] = useState([]);
 
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     axios
       .get("http://localhost:3030/product/getAllProducts")
@@ -16,7 +17,6 @@ const SearchProduct = () => {
       .then((data) => setProducts(data))
       .catch((error) => console.error(error));
   }, []);
-  console.log(products);
 
   useEffect(() => {
     setTimeout(() => {
@@ -138,7 +138,7 @@ const SearchProduct = () => {
           <br />
         </div>
         <div style={{ margin: "1%", width: "70%" }}>
-          {products.map((product) => (
+          {prds.map((prd) => (
             <div
               className="singleproduct"
               style={{
@@ -148,15 +148,14 @@ const SearchProduct = () => {
               }}
             >
               <img
-                src={product.imageUrl[0]}
+                src={prd.imageUrl[0]}
                 style={{ width: "120px", height: "160px", margin: "1%" }}
+                alt="hellos"
               />
               <div style={{ margin: "1%" }}>
-                <h4>{product.productName}</h4>
+                <h4>{prd.productName}</h4>
 
-                <h3 style={{ position: "absolute" }}>
-                  &#x20B9;{product.price}
-                </h3>
+                <h3 style={{ position: "absolute" }}>&#x20B9;{prd.price}</h3>
               </div>
             </div>
           ))}
