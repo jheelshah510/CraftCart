@@ -5,6 +5,7 @@ import UserInfoContext from "../context/UserInfoContext";
 import { useHistory } from "react-router-dom";
 
 import axios from "axios";
+import Loading from "../components/Loading";
 
 const NewProductForm = () => {
   const [pname, setPname] = useState("");
@@ -26,7 +27,7 @@ const NewProductForm = () => {
 
   // return a loading message if isLoaded is false
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   const sId = allData._id;

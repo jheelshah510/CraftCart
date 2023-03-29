@@ -163,7 +163,7 @@ const Navigation = () => {
             </Nav>
             <Nav className="mr-sm-4">
               <>
-                <Nav.Link href="#">Products</Nav.Link>
+                <Nav.Link href="/searchproduct">Products</Nav.Link>
               </>
             </Nav>
             <Nav className="mr-sm-4">
