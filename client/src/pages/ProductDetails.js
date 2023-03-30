@@ -9,14 +9,16 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./ImageSlider.css";
 import Button from "react-bootstrap/Button";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 const ProductDetails = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [product, setProduct] = useState({});
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
+  const history = useHistory();
 
   const [amount, setAmount] = useState(1);
   useEffect(() => {
@@ -30,12 +32,16 @@ const ProductDetails = () => {
     setTimeout(() => {
       setIsLoaded(true);
       setSelectedImage(product.imageUrl[product.imageUrl.length - 1]);
-    }, 1000);
+    }, 800);
   }, [isLoaded]);
 
   // return a loading message if isLoaded is false
   if (!isLoaded) {
-    return <div>Loading...</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   const setDecrease = () => {
@@ -51,6 +57,9 @@ const ProductDetails = () => {
     const wordSlider = product.imageUrl[index];
     setSelectedImage(wordSlider);
   };
+  const goBack = () => {
+    history.goBack();
+  };
 
   return (
     <div>
@@ -58,6 +67,7 @@ const ProductDetails = () => {
       <Button
         className="add-cart"
         style={{ marginLeft: "50vh", marginTop: "5vh" }}
+        onClick={() => goBack()}
       >
         <FontAwesomeIcon icon={faArrowLeft} />
         <b> Back To Products</b>

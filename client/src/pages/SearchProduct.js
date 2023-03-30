@@ -4,30 +4,64 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import Loading from "../components/Loading";
+import { useHistory } from "react-router-dom";
+import { useFilterContext } from "../context/FilterContext";
+import Dropdown from "react-bootstrap/Dropdown";
+import DropdownButton from "react-bootstrap/DropdownButton";
 
 const SearchProduct = () => {
   const [products, setProducts] = useState([]);
+  const {
+    filters: { selectedOptionss, price, maxPrice, minPrice },
+    filter_products,
+    sorting,
+    updateFilterValue,
+  } = useFilterContext();
 
   const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
-    axios
-      .get("http://localhost:3030/product/getAllProducts")
-      .then((response) => response.data)
-      .then((data) => setProducts(data))
-      .catch((error) => console.error(error));
-  }, []);
-  console.log(products);
+  const history = useHistory();
+
+  const [selectedOption, setSelectedOption] = useState("Select an option");
+
+  const handleSelect = (eventKey, event) => {
+    setSelectedOption(event.target.text);
+  };
+
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3030/product/getAllProducts")
+  //     .then((response) => response.data)
+  //     .then((data) => setProducts(data))
+  //     .catch((error) => console.error(error));
+  // }, []);
 
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
+      setProducts(filter_products);
     }, 1000);
-  }, [isLoaded]);
-
+  }, [isLoaded, filter_products]);
   if (!isLoaded) {
     return <Loading />;
   }
 
+  const displayProduct = (id) => {
+    history.push(`/productdetails/${id}`);
+  };
+  const getUniqueData = (data, attr) => {
+    let newVal = data.map((curElem) => {
+      return curElem[attr];
+    });
+    if (attr === "colors") {
+      // return (newVal = ["All", ...new Set([].concat(...newVal))]);
+      newVal = newVal.flat();
+    }
+
+    return (newVal = ["all", ...new Set(newVal)]);
+  };
+
+  const categoryData = getUniqueData(filter_products, "selectedOptions");
+  console.log(categoryData);
   return (
     <div>
       <Navigation />
@@ -36,7 +70,7 @@ const SearchProduct = () => {
           style={{
             border: "1px solid black",
             width: "20%",
-            height: "500px",
+            height: "600px",
             margin: "1%",
           }}
         >
@@ -48,10 +82,11 @@ const SearchProduct = () => {
             style={{ marginLeft: "5%" }}
             type="checkbox"
             id=""
-            name=""
-            value=""
+            name="category"
+            value="Jute"
+            onSelect={updateFilterValue}
           />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
+          <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
             Jute
           </label>
@@ -59,10 +94,11 @@ const SearchProduct = () => {
             style={{ marginLeft: "5%" }}
             type="checkbox"
             id=""
-            name=""
-            value=""
+            name="category"
+            value="Pottery"
+            onSelect={updateFilterValue}
           />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
+          <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
             Pottery
           </label>
@@ -70,10 +106,11 @@ const SearchProduct = () => {
             style={{ marginLeft: "5%" }}
             type="checkbox"
             id=""
-            name=""
-            value=""
+            name="category"
+            value="Leather"
+            onSelect={updateFilterValue}
           />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
+          <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
             Leather
           </label>
@@ -83,10 +120,11 @@ const SearchProduct = () => {
             style={{ marginLeft: "5%" }}
             type="checkbox"
             id=""
-            name=""
-            value=""
+            name="category"
+            value="Brass"
+            onSelect={updateFilterValue}
           />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
+          <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
             Brass
           </label>
@@ -94,10 +132,11 @@ const SearchProduct = () => {
             style={{ marginLeft: "5%" }}
             type="checkbox"
             id=""
-            name=""
-            value=""
+            name="category"
+            value="Paintings"
+            onSelect={updateFilterValue}
           />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
+          <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
             Paintings
           </label>
@@ -105,10 +144,11 @@ const SearchProduct = () => {
             style={{ marginLeft: "5%" }}
             type="checkbox"
             id=""
-            name=""
-            value=""
+            name="category"
+            value="Clothing"
+            onSelect={updateFilterValue}
           />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
+          <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
             Clothing
           </label>
@@ -117,10 +157,11 @@ const SearchProduct = () => {
             style={{ marginLeft: "5%" }}
             type="checkbox"
             id=""
-            name=""
-            value=""
+            name="category"
+            value="Carpet Weaving"
+            onSelect={updateFilterValue}
           />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
+          <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
             Carpet Weaving
           </label>
@@ -128,35 +169,51 @@ const SearchProduct = () => {
             style={{ marginLeft: "5%" }}
             type="checkbox"
             id=""
-            name=""
-            value=""
+            name="category"
+            value="Woodwork"
+            onSelect={updateFilterValue}
           />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
+          <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
             Woodwork
           </label>
           <br />
+          <h2 style={{ marginLeft: "5%", marginTop: "6%" }}>
+            <b>Sort</b>
+          </h2>
+          <div style={{ marginLeft: "5%", marginTop: "6%" }}>
+            <DropdownButton
+              title={selectedOption}
+              onSelect={(handleSelect, sorting)}
+            >
+              <Dropdown.Item eventKey="lowest">Price:Low to High</Dropdown.Item>
+              <Dropdown.Item eventKey="highest">
+                Price:High to Low
+              </Dropdown.Item>
+            </DropdownButton>
+          </div>
         </div>
         <div style={{ margin: "1%", width: "70%" }}>
-          {products.map((product) => (
+          {products.map((prd) => (
             <div
               className="singleproduct"
               style={{
                 display: "flex",
                 margin: "1%",
                 border: "1px solid black",
+                cursor: "pointer",
               }}
+              onClick={() => displayProduct(prd._id)}
             >
               <img
-                src={product.imageUrl[0]}
+                src={prd.imageUrl[0]}
                 style={{ width: "120px", height: "160px", margin: "1%" }}
+                alt="hellos"
               />
               <div style={{ margin: "1%" }}>
-                <h4>{product.productName}</h4>
+                <h4>{prd.productName}</h4>
 
-                <h3 style={{ position: "absolute" }}>
-                  &#x20B9;{product.price}
-                </h3>
+                <h3 style={{ position: "absolute" }}>&#x20B9;{prd.price}</h3>
               </div>
             </div>
           ))}

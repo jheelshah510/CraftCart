@@ -11,6 +11,8 @@ import AuthContext from "../context/AuthContext";
 import UserInfoContext from "../context/UserInfoContext";
 import axios from "axios";
 import Loading from "./Loading";
+import Button from "react-bootstrap/esm/Button";
+import { useHistory } from "react-router-dom";
 
 const Navigation = () => {
   const { loggedIn, getLoggedIn } = useContext(AuthContext);
@@ -19,17 +21,35 @@ const Navigation = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [sellerAccountProfileUrl, setSellerAccountProfileUrl] = useState();
   const [buyerAccountProfileUrl, setBuyerAccountProfileUr] = useState();
+  const [query, setQuery] = useState("");
 
+  const history = useHistory();
+
+  // useEffect(() => {
+  //   const listener = (event) => {
+  //     if (event.code === "Enter" || event.code === "NumpadEnter") {
+  //       console.log("Enter key was pressed. Run your function.");
+  //       event.preventDefault();
+  //     }
+  //   };
+  //   document.addEventListener("keydown", listener);
+  //   return () => {
+  //     document.removeEventListener("keydown", listener);
+  //   };
+  // }, []);
   // simulate a delay of 2 seconds before setting isLoaded to true
   setTimeout(() => {
     setIsLoaded(true);
 
-    if (allData.role === "seller") {
-      setSellerAccountProfileUrl(`/selleraccountinfo/${allData._id}`);
+    if (loggedIn) {
+      if (allData.role === "seller") {
+        setSellerAccountProfileUrl(`/selleraccountinfo/${allData._id}`);
+      }
     }
-
-    if (allData.role === "buyer") {
-      setBuyerAccountProfileUr(`/profile/${allData._id}`);
+    if (loggedIn) {
+      if (allData.role === "buyer") {
+        setBuyerAccountProfileUr(`/profile/${allData._id}`);
+      }
     }
   }, 1000);
 
@@ -42,6 +62,19 @@ const Navigation = () => {
     await axios.get("http://localhost:3030/auth/logout");
     getLoggedIn();
   }
+
+  // const handleKey = async (event) => {
+  //   if (event.code === "Enter" || event.code === "NumpadEnter") {
+  //     const { data } = await axios.get(
+  //       `http://localhost:3030/product/find?search=${query}`
+  //     );
+  //     console.log(data);
+  //   }
+  // };
+
+  const searchProduct = async () => {
+    history.push(`/search?query=${query}`);
+  };
 
   return (
     <>
@@ -85,8 +118,13 @@ const Navigation = () => {
                   type="text"
                   placeholder="Search"
                   className="w-100 "
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
                 />
               </Form>
+              <Button className="primary" onClick={searchProduct}>
+                Search
+              </Button>
             </Nav>
             {!loggedIn && (
               <Nav className="mr-sm-4">

@@ -16,6 +16,7 @@ import Homepage from "./pages/Homepage";
 import EditProductModal from "./components/EditProductModal";
 import BuyerProfile from "./pages/BuyerProfile";
 import SearchProduct from "./pages/SearchProduct";
+import { SrchProduct } from "./pages/SrchProduct";
 
 axios.defaults.withCredentials = true;
 
@@ -58,6 +59,7 @@ function App() {
         />
         <Route exact path="/test" component={EditProductModal} />
         <Route exact path="/profile/:id" component={BuyerProfile} />
+        <Route exact path="/search" component={SrchProduct} />
       </BrowserRouter>
     </>
   );

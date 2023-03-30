@@ -133,45 +133,31 @@ exports.modifyProduct = async (req, res) => {
   }
 };
 exports.find = async (req, res, next) => {
-  // try {
-  //   const { search } = req.query;
-  //   let products;
-  //   if (search) {
-  //     products = await Product.aggregate([
-  //       {
-  //         $search: {
-  //           index: "productName_autocomplete",
-  //           autocomplete: {
-  //             query: "open gov",
-  //             path: "productName",
-  //           },
-  //         },
-  //       },
-  //       {
-  //         $limit: 5,
-  //       },
-  //       {
-  //         $project: {
-  //           _id: 1,
-  //           productName: 1,
-  //           description: 1,
-  //           price: 1,
-  //           quantity: 1,
-  //         },
-  //       },
-  //     ]);
-  //   } else {
-  //     products = await Product.find().sort({ createdAt: "desc" });
-  //   }
-  //   return res.status(200).json({
-  //     statusCode: 200,
-  //     message: "Fetched posts",
-  //     data: { products },
-  //   });
-  // } catch (error) {
-  //   console.error(error);
-  //   res.status(500).json({ message: "Server error" });
-  // }
+  try {
+    const { search } = req.query;
+    let products;
+    if (search) {
+      products = await Product.aggregate([
+        {
+          $search: {
+            index: "search_product",
+            text: {
+              query: search,
+              path: {
+                wildcard: "*",
+              },
+            },
+          },
+        },
+      ]);
+    } else {
+      products = await Product.find().sort({ createdAt: "desc" });
+    }
+    res.json(products);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
 exports.getAllProducts = async (req, res) => {
