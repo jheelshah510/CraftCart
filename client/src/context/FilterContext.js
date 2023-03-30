@@ -15,7 +15,7 @@ const initialState = {
   all_products: [],
   sorting_value: "lowest",
   filters: {
-    selectedOptions: "all",
+    category: "all",
     maxPrice: 0,
     price: 0,
     minPrice: 0,
@@ -33,8 +33,6 @@ export const FilterContextProvider = ({ children }) => {
   }, []);
 
   const [state, dispatch] = useReducer(reducer, initialState);
-
-  // to set the grid view
 
   // sorting function
   const sorting = (event) => {

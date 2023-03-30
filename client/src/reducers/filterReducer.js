@@ -17,6 +17,7 @@ const filterReducer = (state, action) => {
         ...state,
         filter_products: [...action.payload],
         all_products: [...action.payload],
+
         filters: { ...state.filters, maxPrice, price: maxPrice },
       };
 
@@ -67,23 +68,23 @@ const filterReducer = (state, action) => {
       let { all_products } = state;
       let tempFilterProduct = [...all_products];
 
-      const { selectedOptions, price } = state.filters;
+      const { category } = state.filters;
 
-      if (selectedOptions !== "all") {
+      if (category !== "all") {
         tempFilterProduct = tempFilterProduct.filter(
-          (curElem) => curElem.selectedOptions === selectedOptions
+          (curElem) => curElem.selectedOptions.toString() === category
         );
       }
 
-      if (price === 0) {
-        tempFilterProduct = tempFilterProduct.filter(
-          (curElem) => curElem.price === price
-        );
-      } else {
-        tempFilterProduct = tempFilterProduct.filter(
-          (curElem) => curElem.price <= price
-        );
-      }
+      // if (price === 0) {
+      //   tempFilterProduct = tempFilterProduct.filter(
+      //     (curElem) => curElem.price === price
+      //   );
+      // } else {
+      //   tempFilterProduct = tempFilterProduct.filter(
+      //     (curElem) => curElem.price <= price
+      //   );
+      // }
       return {
         ...state,
         filter_products: tempFilterProduct,
@@ -94,7 +95,7 @@ const filterReducer = (state, action) => {
         ...state,
         filters: {
           ...state.filters,
-          selectedOptions: "all",
+          category: "all",
           maxPrice: 0,
           price: state.filters.maxPrice,
           minPrice: state.filters.maxPrice,

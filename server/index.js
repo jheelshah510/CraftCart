@@ -35,6 +35,7 @@ app.use(
 );
 app.use("/auth", require("./routers/userRouter"));
 app.use("/sellauth", require("./routers/sellerRoute"));
+app.use("/cart", require("./routers/cartRouter"));
 app.use("/category", require("./routers/categoryRouter"));
 app.use("/product", require("./routers/productRouter"));
-app.use("/userinfo", require("./routers/userInfoRoute"));
+// app.use("/userinfo", require("./routers/userInfoRoute"));

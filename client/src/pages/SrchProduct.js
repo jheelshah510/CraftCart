@@ -25,112 +25,17 @@ export const SrchProduct = ({ location }) => {
     <div>
       {" "}
       <Navigation />
+      <h2
+        style={{
+          height: "20px",
+          width: "100vw",
+          marginTop: "30px",
+          marginLeft: "2%",
+        }}
+      >
+        Search results...
+      </h2>
       <div style={{ display: "flex" }}>
-        <div
-          style={{
-            border: "1px solid black",
-            width: "20%",
-            height: "500px",
-            margin: "1%",
-          }}
-        >
-          <h2 style={{ marginLeft: "5%", marginTop: "6%" }}>
-            <b>Filters</b>
-          </h2>
-          <h3 style={{ margin: "5%" }}>Categories</h3>
-          <input
-            style={{ marginLeft: "5%" }}
-            type="checkbox"
-            id=""
-            name=""
-            value=""
-          />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
-            {" "}
-            Jute
-          </label>
-          <input
-            style={{ marginLeft: "5%" }}
-            type="checkbox"
-            id=""
-            name=""
-            value=""
-          />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
-            {" "}
-            Pottery
-          </label>
-          <input
-            style={{ marginLeft: "5%" }}
-            type="checkbox"
-            id=""
-            name=""
-            value=""
-          />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
-            {" "}
-            Leather
-          </label>
-          <br />
-
-          <input
-            style={{ marginLeft: "5%" }}
-            type="checkbox"
-            id=""
-            name=""
-            value=""
-          />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
-            {" "}
-            Brass
-          </label>
-          <input
-            style={{ marginLeft: "5%" }}
-            type="checkbox"
-            id=""
-            name=""
-            value=""
-          />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
-            {" "}
-            Paintings
-          </label>
-          <input
-            style={{ marginLeft: "5%" }}
-            type="checkbox"
-            id=""
-            name=""
-            value=""
-          />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
-            {" "}
-            Clothing
-          </label>
-          <br />
-          <input
-            style={{ marginLeft: "5%" }}
-            type="checkbox"
-            id=""
-            name=""
-            value=""
-          />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
-            {" "}
-            Carpet Weaving
-          </label>
-          <input
-            style={{ marginLeft: "5%" }}
-            type="checkbox"
-            id=""
-            name=""
-            value=""
-          />
-          <label style={{ marginLeft: "2%" }} for="vehicle1">
-            {" "}
-            Woodwork
-          </label>
-          <br />
-        </div>
         <div style={{ margin: "1%", width: "70%" }}>
           {products.map((product) => (
             <div

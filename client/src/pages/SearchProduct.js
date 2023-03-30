@@ -1,22 +1,34 @@
 import React from "react";
 import Navigation from "../components/Navigation";
 import { useEffect } from "react";
-import axios from "axios";
 import { useState } from "react";
 import Loading from "../components/Loading";
 import { useHistory } from "react-router-dom";
 import { useFilterContext } from "../context/FilterContext";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+import Button from "react-bootstrap/esm/Button";
 
 const SearchProduct = () => {
   const [products, setProducts] = useState([]);
   const {
-    filters: { selectedOptionss, price, maxPrice, minPrice },
+    filters: { category, price, maxPrice, minPrice },
     filter_products,
+    all_products,
     sorting,
     updateFilterValue,
   } = useFilterContext();
+
+  // get the unique values of each property
+  const getUniqueData = (data, attr) => {
+    let newVal = data.map((curElem) => {
+      return curElem[attr].toString();
+    });
+
+    return (newVal = ["all", ...new Set(newVal)]);
+  };
+
+  const categoryData = getUniqueData(all_products, "selectedOptions");
 
   const [isLoaded, setIsLoaded] = useState(false);
   const history = useHistory();
@@ -26,14 +38,6 @@ const SearchProduct = () => {
   const handleSelect = (eventKey, event) => {
     setSelectedOption(event.target.text);
   };
-
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3030/product/getAllProducts")
-  //     .then((response) => response.data)
-  //     .then((data) => setProducts(data))
-  //     .catch((error) => console.error(error));
-  // }, []);
 
   useEffect(() => {
     setTimeout(() => {
@@ -48,20 +52,7 @@ const SearchProduct = () => {
   const displayProduct = (id) => {
     history.push(`/productdetails/${id}`);
   };
-  const getUniqueData = (data, attr) => {
-    let newVal = data.map((curElem) => {
-      return curElem[attr];
-    });
-    if (attr === "colors") {
-      // return (newVal = ["All", ...new Set([].concat(...newVal))]);
-      newVal = newVal.flat();
-    }
 
-    return (newVal = ["all", ...new Set(newVal)]);
-  };
-
-  const categoryData = getUniqueData(filter_products, "selectedOptions");
-  console.log(categoryData);
   return (
     <div>
       <Navigation />
@@ -78,13 +69,13 @@ const SearchProduct = () => {
             <b>Filters</b>
           </h2>
           <h3 style={{ margin: "5%" }}>Categories</h3>
-          <input
+          {/* <input
             style={{ marginLeft: "5%" }}
             type="checkbox"
             id=""
             name="category"
             value="Jute"
-            onSelect={updateFilterValue}
+            onChange={updateFilterValue}
           />
           <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
@@ -96,7 +87,7 @@ const SearchProduct = () => {
             id=""
             name="category"
             value="Pottery"
-            onSelect={updateFilterValue}
+            onChange={updateFilterValue}
           />
           <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
@@ -108,7 +99,7 @@ const SearchProduct = () => {
             id=""
             name="category"
             value="Leather"
-            onSelect={updateFilterValue}
+            onChange={updateFilterValue}
           />
           <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
@@ -122,7 +113,7 @@ const SearchProduct = () => {
             id=""
             name="category"
             value="Brass"
-            onSelect={updateFilterValue}
+            onChange={updateFilterValue}
           />
           <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
@@ -134,7 +125,7 @@ const SearchProduct = () => {
             id=""
             name="category"
             value="Paintings"
-            onSelect={updateFilterValue}
+            onChange={updateFilterValue}
           />
           <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
@@ -146,7 +137,7 @@ const SearchProduct = () => {
             id=""
             name="category"
             value="Clothing"
-            onSelect={updateFilterValue}
+            onChange={updateFilterValue}
           />
           <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
@@ -159,7 +150,7 @@ const SearchProduct = () => {
             id=""
             name="category"
             value="Carpet Weaving"
-            onSelect={updateFilterValue}
+            onChange={updateFilterValue}
           />
           <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
@@ -171,14 +162,38 @@ const SearchProduct = () => {
             id=""
             name="category"
             value="Woodwork"
-            onSelect={updateFilterValue}
+            onChange={updateFilterValue}
           />
           <label style={{ marginLeft: "2%" }} htmlFor="vehicle1">
             {" "}
             Woodwork
-          </label>
+          </label> */}
+          {categoryData.map((curElem, index) => {
+            return (
+              <div
+                style={{
+                  marginLeft: "30px",
+                  float: "left",
+                  marginBottom: "15px",
+                }}
+              >
+                <Button
+                  key={index}
+                  type="button"
+                  name="category"
+                  value={curElem}
+                  className={curElem === category ? "active" : ""}
+                  onClick={updateFilterValue}
+                  variant="light"
+                  style={{ "text-decoration": "none" }}
+                >
+                  {curElem}
+                </Button>
+              </div>
+            );
+          })}
           <br />
-          <h2 style={{ marginLeft: "5%", marginTop: "6%" }}>
+          <h2 style={{ marginLeft: "5%", marginTop: "80%" }}>
             <b>Sort</b>
           </h2>
           <div style={{ marginLeft: "5%", marginTop: "6%" }}>
