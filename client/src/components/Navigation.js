@@ -73,12 +73,7 @@ const Navigation = () => {
   // };
 
   const searchProduct = async () => {
-    fetch(`http://localhost:3030/product/find?search=${query}`)
-      .then((res) => res.json())
-      .then((products) => {
-        history.push("/searchproducts", { products });
-      })
-      .catch((err) => console.error(err));
+    history.push(`/search?query=${query}`);
   };
 
   return (

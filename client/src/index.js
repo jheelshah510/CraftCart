@@ -7,14 +7,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./bootstrap.min.css";
 import { AuthContextProvider } from "./context/AuthContext";
 import { UserInfoContextProvider } from "./context/UserInfoContext";
+import { FilterContextProvider } from "./context/FilterContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <AuthContextProvider>
-    <UserInfoContextProvider>
-      <App />
-    </UserInfoContextProvider>
-  </AuthContextProvider>
+  <FilterContextProvider>
+    <AuthContextProvider>
+      <UserInfoContextProvider>
+        <App />
+      </UserInfoContextProvider>
+    </AuthContextProvider>
+  </FilterContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -153,11 +153,7 @@ exports.find = async (req, res, next) => {
     } else {
       products = await Product.find().sort({ createdAt: "desc" });
     }
-    return res.status(200).json({
-      statusCode: 200,
-      message: "Fetched posts",
-      data: { products },
-    });
+    res.json(products);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error" });
