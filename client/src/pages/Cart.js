@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useCartContext } from "../context/CartContext";
 import { useHistory } from "react-router-dom";
+import Card from "react-bootstrap/Card";
 
 const Cart = () => {
   const [amount, setAmount] = useState(1);
@@ -31,12 +32,16 @@ const Cart = () => {
     return (
       <div>
         <Navigation />
+        <Card style={{ marginTop: "1%", marginLeft: "5%", width: "50%" }} body>
+          This is some text within a card body.
+        </Card>
+        ;
         <div style={{ display: "flex" }}>
           <div
             style={{
               marginLeft: "5%",
               marginRight: "2%",
-              marginTop: "2%",
+              marginTop: "1%",
               width: "80%",
             }}
           >
@@ -102,7 +107,7 @@ const Cart = () => {
               width: "40%",
               height: "30%",
               margin: "5%",
-              marginTop: "2%",
+              marginTop: "1%",
             }}
           >
             <div style={{ margin: "2%" }}>

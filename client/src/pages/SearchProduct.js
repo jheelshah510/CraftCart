@@ -181,11 +181,10 @@ const SearchProduct = () => {
                   key={index}
                   type="button"
                   name="category"
+                  variant="light"
                   value={curElem}
                   className={curElem === category ? "active" : ""}
                   onClick={updateFilterValue}
-                  variant="light"
-                  style={{ textDecoration: "none" }}
                 >
                   {curElem}
                 </Button>

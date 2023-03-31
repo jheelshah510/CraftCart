@@ -5,13 +5,16 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCartShopping,
+  faUser,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 import logo from "../CraftCart.png";
 import AuthContext from "../context/AuthContext";
 import UserInfoContext from "../context/UserInfoContext";
 import axios from "axios";
 import Loading from "./Loading";
-import Button from "react-bootstrap/esm/Button";
 import { useHistory } from "react-router-dom";
 
 const Navigation = () => {
@@ -61,6 +64,7 @@ const Navigation = () => {
   async function logout() {
     await axios.get("http://localhost:3030/auth/logout");
     getLoggedIn();
+    history.push("/");
   }
 
   // const handleKey = async (event) => {
@@ -122,9 +126,16 @@ const Navigation = () => {
                   onChange={(e) => setQuery(e.target.value)}
                 />
               </Form>
-              <Button className="primary" onClick={searchProduct}>
-                Search
-              </Button>
+              <div
+                style={{ marginTop: "1%", marginLeft: "1%" }}
+                className="primary"
+                onClick={searchProduct}
+              >
+                <FontAwesomeIcon
+                  style={{ color: "white", cursor: "pointer" }}
+                  icon={faMagnifyingGlass}
+                />
+              </div>
             </Nav>
             {!loggedIn && (
               <Nav className="mr-sm-4">
@@ -192,21 +203,28 @@ const Navigation = () => {
               </Nav>
             )}
             <Nav className="mr-sm-4">
-              <>
-                <Nav.Link href="#">
-                  <FontAwesomeIcon icon={faCartShopping} />
-                  Cart
-                </Nav.Link>
-              </>
+              {!loggedIn && (
+                <>
+                  <Nav.Link href="#">
+                    <FontAwesomeIcon icon={faCartShopping} />
+                    Cart
+                  </Nav.Link>
+                </>
+              )}
+              {loggedIn && (
+                <>
+                  {allData.role !== "seller" && (
+                    <Nav.Link href="#">
+                      <FontAwesomeIcon icon={faCartShopping} />
+                      Cart
+                    </Nav.Link>
+                  )}
+                </>
+              )}
             </Nav>
             <Nav className="mr-sm-4">
               <>
                 <Nav.Link href="/searchproduct">Products</Nav.Link>
-              </>
-            </Nav>
-            <Nav className="mr-sm-4">
-              <>
-                <Nav.Link href="#">Deals</Nav.Link>
               </>
             </Nav>
           </Navbar.Collapse>
