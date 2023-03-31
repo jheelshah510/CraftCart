@@ -15,7 +15,6 @@ import AuthContext from "../context/AuthContext";
 import UserInfoContext from "../context/UserInfoContext";
 import axios from "axios";
 import Loading from "./Loading";
-import Button from "react-bootstrap/esm/Button";
 import { useHistory } from "react-router-dom";
 
 const Navigation = () => {
@@ -65,6 +64,7 @@ const Navigation = () => {
   async function logout() {
     await axios.get("http://localhost:3030/auth/logout");
     getLoggedIn();
+    history.push("/");
   }
 
   // const handleKey = async (event) => {
@@ -203,21 +203,28 @@ const Navigation = () => {
               </Nav>
             )}
             <Nav className="mr-sm-4">
-              <>
-                <Nav.Link href="#">
-                  <FontAwesomeIcon icon={faCartShopping} />
-                  Cart
-                </Nav.Link>
-              </>
+              {!loggedIn && (
+                <>
+                  <Nav.Link href="#">
+                    <FontAwesomeIcon icon={faCartShopping} />
+                    Cart
+                  </Nav.Link>
+                </>
+              )}
+              {loggedIn && (
+                <>
+                  {allData.role !== "seller" && (
+                    <Nav.Link href="#">
+                      <FontAwesomeIcon icon={faCartShopping} />
+                      Cart
+                    </Nav.Link>
+                  )}
+                </>
+              )}
             </Nav>
             <Nav className="mr-sm-4">
               <>
                 <Nav.Link href="/searchproduct">Products</Nav.Link>
-              </>
-            </Nav>
-            <Nav className="mr-sm-4">
-              <>
-                <Nav.Link href="#">Deals</Nav.Link>
               </>
             </Nav>
           </Navbar.Collapse>

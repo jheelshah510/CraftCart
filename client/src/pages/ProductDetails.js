@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,6 +13,8 @@ import { NavLink, useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../components/Loading";
 import { useCartContext } from "../context/CartContext";
+import UserInfoContext from "../context/UserInfoContext";
+import AuthContext from "../context/AuthContext";
 
 const ProductDetails = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -20,6 +22,8 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
   const { addToCart } = useCartContext();
+  const allData = useContext(UserInfoContext);
+  const { loggedIn } = useContext(AuthContext);
 
   const history = useHistory();
 
@@ -113,11 +117,43 @@ const ProductDetails = () => {
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
-          <NavLink to="/cart" onClick={() => addToCart(id, amount, product)}>
-            <Button className="add-cart">
-              <b>Add to Cart</b>
-            </Button>
-          </NavLink>
+
+          {!loggedIn && (
+            <NavLink to="/cart" onClick={() => addToCart(id, amount, product)}>
+              <Button className="add-cart">
+                <b>Add to Cart</b>
+              </Button>
+            </NavLink>
+          )}
+          {loggedIn && (
+            <>
+              {allData.role === "buyer" && (
+                <NavLink
+                  to="/cart"
+                  onClick={() => addToCart(id, amount, product)}
+                >
+                  <Button className="add-cart">
+                    <b>Add to Cart</b>
+                  </Button>
+                </NavLink>
+              )}
+            </>
+          )}
+          {loggedIn && (
+            <>
+              {allData.role === "seller" && (
+                <Button
+                  className="add-cart"
+                  style={{
+                    cursor: "not-allowed",
+                  }}
+                  disabled
+                >
+                  <b>Add to Cart</b>
+                </Button>
+              )}
+            </>
+          )}
         </div>
       </div>
     </div>
