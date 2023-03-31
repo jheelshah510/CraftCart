@@ -8,6 +8,7 @@ import { useFilterContext } from "../context/FilterContext";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/esm/Button";
+import RangeSlider from "react-bootstrap-range-slider";
 
 const SearchProduct = () => {
   const [products, setProducts] = useState([]);
@@ -192,7 +193,17 @@ const SearchProduct = () => {
             );
           })}
           <br />
-          <h2 style={{ marginLeft: "5%", marginTop: "80%" }}>
+          <div style={{ margin: "10%", marginTop: "200px" }}>
+            <RangeSlider
+              value={price}
+              name="price"
+              style={{ width: "15vw" }}
+              onChange={updateFilterValue}
+              min={minPrice}
+              max={maxPrice}
+            />
+          </div>
+          <h2 style={{ marginLeft: "5%", marginTop: "20%" }}>
             <b>Sort</b>
           </h2>
           <div style={{ marginLeft: "5%", marginTop: "6%" }}>
