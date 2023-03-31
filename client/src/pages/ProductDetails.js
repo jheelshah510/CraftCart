@@ -78,7 +78,7 @@ const ProductDetails = () => {
         <div className="main">
           <img
             src={selectedImage}
-            style={{ height: "50vh" }}
+            style={{ height: "40vh", width: "25vw" }}
             alt="An Alt Text"
           />
           <div className="flex_row">

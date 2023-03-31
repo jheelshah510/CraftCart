@@ -5,7 +5,11 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCartShopping,
+  faUser,
+  faMagnifyingGlass,
+} from "@fortawesome/free-solid-svg-icons";
 import logo from "../CraftCart.png";
 import AuthContext from "../context/AuthContext";
 import UserInfoContext from "../context/UserInfoContext";
@@ -122,9 +126,16 @@ const Navigation = () => {
                   onChange={(e) => setQuery(e.target.value)}
                 />
               </Form>
-              <Button className="primary" onClick={searchProduct}>
-                Search
-              </Button>
+              <div
+                style={{ marginTop: "1%", marginLeft: "1%" }}
+                className="primary"
+                onClick={searchProduct}
+              >
+                <FontAwesomeIcon
+                  style={{ color: "white", cursor: "pointer" }}
+                  icon={faMagnifyingGlass}
+                />
+              </div>
             </Nav>
             {!loggedIn && (
               <Nav className="mr-sm-4">
