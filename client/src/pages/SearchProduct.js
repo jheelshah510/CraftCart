@@ -185,7 +185,7 @@ const SearchProduct = () => {
                   className={curElem === category ? "active" : ""}
                   onClick={updateFilterValue}
                   variant="light"
-                  style={{ "text-decoration": "none" }}
+                  style={{ textDecoration: "none" }}
                 >
                   {curElem}
                 </Button>
