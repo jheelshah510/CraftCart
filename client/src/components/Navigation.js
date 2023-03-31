@@ -205,7 +205,7 @@ const Navigation = () => {
             <Nav className="mr-sm-4">
               {!loggedIn && (
                 <>
-                  <Nav.Link href="#">
+                  <Nav.Link href="/cart">
                     <FontAwesomeIcon icon={faCartShopping} />
                     Cart
                   </Nav.Link>
@@ -214,7 +214,7 @@ const Navigation = () => {
               {loggedIn && (
                 <>
                   {allData.role !== "seller" && (
-                    <Nav.Link href="#">
+                    <Nav.Link href="/cart">
                       <FontAwesomeIcon icon={faCartShopping} />
                       Cart
                     </Nav.Link>
