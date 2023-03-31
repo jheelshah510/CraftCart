@@ -9,15 +9,18 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "./ImageSlider.css";
 import Button from "react-bootstrap/Button";
-import { useHistory, useParams } from "react-router-dom";
+import { NavLink, useHistory, useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "../components/Loading";
+import { useCartContext } from "../context/CartContext";
 
 const ProductDetails = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [product, setProduct] = useState({});
   const { id } = useParams();
   const [selectedImage, setSelectedImage] = useState("");
+  const { addToCart } = useCartContext();
+
   const history = useHistory();
 
   const [amount, setAmount] = useState(1);
@@ -53,7 +56,6 @@ const ProductDetails = () => {
   };
 
   const handleClick = (index) => {
-    console.log(index);
     const wordSlider = product.imageUrl[index];
     setSelectedImage(wordSlider);
   };
@@ -111,9 +113,11 @@ const ProductDetails = () => {
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
-          <Button className="add-cart">
-            <b>Add to Cart</b>
-          </Button>
+          <NavLink to="/cart" onClick={() => addToCart(id, amount, product)}>
+            <Button className="add-cart">
+              <b>Add to Cart</b>
+            </Button>
+          </NavLink>
         </div>
       </div>
     </div>
