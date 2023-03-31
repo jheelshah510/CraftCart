@@ -168,3 +168,16 @@ exports.getAllProducts = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+exports.getProductByCat = async (req, res) => {
+  try {
+    const catname = req.params.catname;
+    const products = await Product.find({ selectedOptions: catname });
+    if (!products) {
+      return res.json("Invalid Category");
+    }
+    res.json(products);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
