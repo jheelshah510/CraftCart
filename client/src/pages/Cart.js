@@ -15,6 +15,8 @@ import AuthContext from "../context/AuthContext";
 import UserInfoContext from "../context/UserInfoContext";
 import { useState } from "react";
 import Loading from "../components/Loading";
+import EmptyCartPage from "../components/EmptyCartPage.";
+import NotLogin from "../components/NotLogin";
 
 const Cart = () => {
   const { cart, removeItem, setDecrease, setIncrement, total_price } =
@@ -34,20 +36,15 @@ const Cart = () => {
   }
   console.log(allData);
 
+  const thankYou = () => {
+    history.push("/thank");
+  };
+
   if (loggedIn) {
     if (cart.length === 0) {
       return (
         <div>
-          <h3>Your Cart is empty</h3>
-
-          <Button
-            variant="outline-primary"
-            type="submit"
-            onClick={() => history.push("/searchproduct")}
-          >
-            {" "}
-            Continue Shopping{" "}
-          </Button>
+          <EmptyCartPage />
         </div>
       );
     } else {
@@ -58,18 +55,14 @@ const Cart = () => {
             style={{ marginTop: "1%", marginLeft: "5%", width: "50%" }}
             body
           >
-            {allData.address.length > 0 &&
-              allData.phoneNumber.length > 0 &&
-              allData.pincode && (
-                <>
-                  <b></b>Deliver to: {allData.address}, {allData.pincode}
-                  <br />
-                  Phone number: {allData.phoneNumber}
-                </>
-              )}
-            {allData.address.length === 0 ||
-            allData.phoneNumber.length === 0 ||
-            allData.pincode.toString().length === null ? (
+            {allData.address && allData.phoneNumber && allData.pincode && (
+              <>
+                <b></b>Deliver to: {allData.address}, {allData.pincode}
+                <br />
+                Phone number: {allData.phoneNumber}
+              </>
+            )}
+            {!allData.address || !allData.phoneNumber || !allData.pincode ? (
               <>
                 {<FontAwesomeIcon icon={faExclamationTriangle} />} &nbsp;
                 &nbsp;Please Update your User Profile to order. Click{" "}
@@ -188,25 +181,22 @@ const Cart = () => {
                   Total Amount - {total_price + 0.05 * total_price}
                 </Card.Footer>
               </Card>
-              {allData.address.length > 0 &&
-                allData.phoneNumber.length > 0 &&
-                allData.pincode && (
-                  <Button
-                    variant="primary"
-                    style={{
-                      width: "10vw",
-                      height: "6vh",
-                      marginTop: "20px",
-                      marginLeft: "4vw",
-                    }}
-                  >
-                    Place Order
-                  </Button>
-                )}
+              {allData.address && allData.phoneNumber && allData.pincode && (
+                <Button
+                  variant="primary"
+                  style={{
+                    width: "10vw",
+                    height: "6vh",
+                    marginTop: "20px",
+                    marginLeft: "4vw",
+                  }}
+                  onClick={() => thankYou()}
+                >
+                  Place Order
+                </Button>
+              )}
 
-              {allData.address.length === 0 ||
-              allData.phoneNumber.length === 0 ||
-              allData.pincode.toString().length === 0 ? (
+              {!allData.address || !allData.phoneNumber || !allData.pincode ? (
                 <Button
                   variant="primary"
                   style={{
@@ -226,7 +216,11 @@ const Cart = () => {
       );
     }
   } else {
-    return <div>Please Login to View Cart</div>;
+    return (
+      <div>
+        <NotLogin />
+      </div>
+    );
   }
 };
 

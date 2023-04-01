@@ -2,26 +2,34 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import Navigation from "../components/Navigation";
+import Loading from "../components/Loading";
 
 const CatProduct = () => {
   const catName = useParams();
 
   const [products, setProducts] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(false);
   const history = useHistory();
 
-  console.log(catName);
-
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios.get(
-        `http://localhost:3030/product/getProductByCat/${catName}`
-      );
-
-      setProducts(result.data);
-    };
-
-    fetchData();
+    axios
+      .get(
+        `http://localhost:3030/product/getProductByCat/${Object.values(
+          catName
+        )}`
+      )
+      .then((response) => response.data)
+      .then((data) => setProducts(data))
+      .catch((error) => console.error(error));
   }, [catName]);
+  setTimeout(() => {
+    setIsLoaded(true);
+  }, 1000);
+
+  // return a loading message if isLoaded is false
+  if (!isLoaded) {
+    return <Loading />;
+  }
 
   const displayProduct = (id) => {
     history.push(`/productdetails/${id}`);
@@ -39,7 +47,7 @@ const CatProduct = () => {
           marginLeft: "2%",
         }}
       >
-        Search results...
+        Category:{Object.values(catName)}
       </h2>
       <div style={{ display: "flex" }}>
         <div style={{ margin: "1%", width: "70%" }}>

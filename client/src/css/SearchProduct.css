@@ -1,0 +1,9 @@
+.active {
+  border-bottom-color: #a2a6ac;
+}
+
+.button:active {
+  background-image: linear-gradient(#3d94d9, #0067b9);
+  border-color: #006dbc;
+  outline: none;
+}

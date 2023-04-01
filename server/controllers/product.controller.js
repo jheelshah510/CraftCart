@@ -181,3 +181,15 @@ exports.getProductByCat = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+exports.getHomeProducts = async (req, res) => {
+  try {
+    const products = await Product.find().sort({ createdAt: -1 }).limit(8);
+    if (!products) {
+      return res.json("No Products Found");
+    }
+    res.json(products);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
