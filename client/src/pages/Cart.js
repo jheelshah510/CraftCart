@@ -16,6 +16,7 @@ import UserInfoContext from "../context/UserInfoContext";
 import { useState } from "react";
 import Loading from "../components/Loading";
 import EmptyCartPage from "../components/EmptyCartPage.";
+import NotLogin from "../components/NotLogin";
 
 const Cart = () => {
   const { cart, removeItem, setDecrease, setIncrement, total_price } =
@@ -34,6 +35,10 @@ const Cart = () => {
     return <Loading />;
   }
   console.log(allData);
+
+  const thankYou = () => {
+    history.push("/thank");
+  };
 
   if (loggedIn) {
     if (cart.length === 0) {
@@ -185,6 +190,7 @@ const Cart = () => {
                     marginTop: "20px",
                     marginLeft: "4vw",
                   }}
+                  onClick={() => thankYou()}
                 >
                   Place Order
                 </Button>
@@ -210,7 +216,11 @@ const Cart = () => {
       );
     }
   } else {
-    return <div>Please Login to View Cart</div>;
+    return (
+      <div>
+        <NotLogin />
+      </div>
+    );
   }
 };
 
