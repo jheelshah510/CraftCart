@@ -184,7 +184,7 @@ exports.getProductByCat = async (req, res) => {
 
 exports.getHomeProducts = async (req, res) => {
   try {
-    const products = await Product.find().sort({ createdAt: -1 }).limit(8);
+    const products = await Product.find().sort({ createdAt: -1 }).limit(6);
     if (!products) {
       return res.json("No Products Found");
     }
