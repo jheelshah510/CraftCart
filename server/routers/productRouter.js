@@ -8,11 +8,14 @@ const {
   getSingleProduct,
   getAllSellerProducts,
   getAllProducts,
+  getHomeProducts,
   getProductByCat,
+
   find,
 } = require("../controllers/product.controller");
 
 router.get("/getAllProducts", getAllProducts);
+router.get("/getHomeProducts", getHomeProducts);
 router.get("/find", find);
 router.post("/add", uploadS3.array("images"), addProduct);
 router.get("/getProductByCat/:catname", getProductByCat);

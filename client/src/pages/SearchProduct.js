@@ -9,6 +9,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
 import Button from "react-bootstrap/esm/Button";
 import RangeSlider from "react-bootstrap-range-slider";
+import "../css/SearchProduct.css";
 
 const SearchProduct = () => {
   const [products, setProducts] = useState([]);
@@ -178,17 +179,41 @@ const SearchProduct = () => {
                   marginBottom: "15px",
                 }}
               >
-                <Button
+                <button
                   key={index}
                   type="button"
                   name="category"
-                  variant="light"
                   value={curElem}
                   className={curElem === category ? "active" : ""}
                   onClick={updateFilterValue}
+                  style={{
+                    backgroundImage: "linear-gradient(#f7f8fa ,#e7e9ec)",
+                    borderColor: "#adb1b8 #a2a6ac #8d9096",
+                    borderStyle: "solid",
+                    borderWidth: "1px",
+                    borderRadius: "3px",
+                    boxShadow: "rgba(255,255,255,.6) 0 1px 0 inset",
+                    boxSizing: "border-box",
+                    color: "#0f1111",
+                    cursor: "pointer",
+                    display: "inline-block",
+                    fontFamily: '"Amazon Ember",Arial,sans-serif',
+                    fontSize: "13px",
+                    height: "29px",
+                    outline: "0",
+                    overflow: "hidden",
+                    padding: "0 11px",
+                    textAlign: "center",
+                    textDecoration: "none",
+                    textOverflow: "ellipsis",
+                    userSelect: "none",
+                    WebkitUserSelect: "none",
+                    touchAction: "manipulation",
+                    whiteSpace: "nowrap",
+                  }}
                 >
                   {curElem}
-                </Button>
+                </button>
               </div>
             );
           })}
@@ -203,10 +228,10 @@ const SearchProduct = () => {
               max={maxPrice}
             />
           </div>
-          <h2 style={{ marginLeft: "5%", marginTop: "20%" }}>
+          <h2 style={{ marginLeft: "5%", marginTop: "5%" }}>
             <b>Sort</b>
           </h2>
-          <div style={{ marginLeft: "5%", marginTop: "6%" }}>
+          <div style={{ marginLeft: "5%", marginTop: "1%" }}>
             <DropdownButton
               title={selectedOption}
               onSelect={(handleSelect, sorting)}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navigation from "../components/Navigation";
 import one from "../components/1.png";
 import two from "../components/2.png";
@@ -17,8 +17,29 @@ import d from "../images/d.png";
 import e from "../images/e.png";
 
 import f from "../images/f.png";
+import axios from "axios";
+import Loading from "../components/Loading";
 
 const Homepage = () => {
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3030/product/getHomeProducts")
+      .then((response) => response.data)
+      .then((data) => setProducts(data))
+      .catch((error) => console.error(error));
+  }, []);
+
+  const [isLoaded, setIsLoaded] = useState(false);
+  setTimeout(() => {
+    setIsLoaded(true);
+  }, 1000);
+
+  // return a loading message if isLoaded is false
+  if (!isLoaded) {
+    return <Loading />;
+  }
+  console.log(products);
   return (
     <div>
       <Navigation />

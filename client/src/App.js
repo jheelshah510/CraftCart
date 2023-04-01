@@ -18,6 +18,7 @@ import BuyerProfile from "./pages/BuyerProfile";
 import SearchProduct from "./pages/SearchProduct";
 import { SrchProduct } from "./pages/SrchProduct";
 import CatProduct from "./pages/CatProduct";
+import EmptyCartPage from "./components/EmptyCartPage.";
 
 axios.defaults.withCredentials = true;
 
@@ -31,6 +32,7 @@ function App() {
         <Route exact path="/signin" component={SignIn} />
         <Route exact path="/sellersignin" component={SellersignIn} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/empty" component={EmptyCartPage} />
         <Route exact path="/productdetails/:id" component={ProductDetails} />
         <Route
           exact
