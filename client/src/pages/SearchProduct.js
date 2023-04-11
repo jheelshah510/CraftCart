@@ -13,6 +13,7 @@ import "../css/SearchProduct.css";
 
 const SearchProduct = () => {
   const [products, setProducts] = useState([]);
+  const [isHover, setIsHover] = useState(false);
   const {
     filters: { category, price, maxPrice, minPrice },
     filter_products,
@@ -55,6 +56,16 @@ const SearchProduct = () => {
     history.push(`/productdetails/${id}`);
   };
 
+  const handleMouseEnter = () => {
+    setIsHover(true);
+  };
+  const handleMouseLeave = () => {
+    setIsHover(false);
+  };
+  const boxStyle = {
+    backgroundColor: isHover ? "#e4e7ed" : "#ffffff",
+  };
+
   return (
     <div>
       <Navigation />
@@ -63,7 +74,7 @@ const SearchProduct = () => {
           style={{
             border: "1px solid black",
             width: "20%",
-            height: "600px",
+            height: "750px",
             margin: "1%",
           }}
         >
@@ -175,6 +186,7 @@ const SearchProduct = () => {
               <div
                 style={{
                   marginLeft: "30px",
+                  marginRight: "80px",
                   float: "left",
                   marginBottom: "15px",
                 }}
@@ -241,9 +253,19 @@ const SearchProduct = () => {
                 Price:High to Low
               </Dropdown.Item>
             </DropdownButton>
+            <br />
+            <br />
+            <h6>
+              {" "}
+              Click &nbsp;
+              <a style={{ color: "blue" }} href="/#">
+                here
+              </a>{" "}
+              To Go Back 🔙{" "}
+            </h6>
           </div>
         </div>
-        <div style={{ margin: "1%", width: "70%" }}>
+        <div style={{ margin: "0.3%", width: "80%" }}>
           {products.map((prd) => (
             <div
               className="singleproduct"

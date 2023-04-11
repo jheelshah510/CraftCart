@@ -254,21 +254,30 @@ const Homepage = () => {
             </Carousel.Item>
           </Carousel>
         </div>
-        <h2 style={{ textAlign: "center", marginBottom: "-20px" }}>
+        <br />
+        <hr class="border border-secondary border-3 opacity-75"></hr>
+        <h2
+          style={{
+            textAlign: "center",
+            marginBottom: "10px",
+            marginTop: "30%",
+          }}
+        >
           Latest Products
         </h2>
         <hr class="border border-secondary border-3 opacity-75"></hr>
+
         <div style={{ marginBottom: "1%" }}>
           <Carousel
             fade
             style={{ float: "left", width: "100%", height: "500px" }}
           >
-            <Carousel.Item style={{ height: "700px" }}>
+            <Carousel.Item style={{ height: "650px" }}>
               <div style={{ display: "flex", cursor: "pointer" }}>
                 {products.map((product) => (
                   <div
                     class="card"
-                    style={{ width: "100%", margin: "2%" }}
+                    style={{ width: "100%", margin: "0.3%" }}
                     onClick={() => displayProduct(product._id)}
                   >
                     <img

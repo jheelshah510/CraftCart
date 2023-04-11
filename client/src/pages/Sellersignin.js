@@ -37,7 +37,7 @@ const SellersignIn = () => {
       <span style={{ width: "20%" }}>
         <h1
           style={{
-            marginLeft: "15vh",
+            marginLeft: "14vh",
             paddingTop: "10vh",
             marginBottom: "8vh",
           }}
@@ -68,7 +68,7 @@ const SellersignIn = () => {
           <Button
             variant="outline-primary"
             type="submit"
-            style={{ marginLeft: "10vh", marginTop: "1vh" }}
+            style={{ marginLeft: "13vh", marginTop: "1vh" }}
           >
             SignIn
           </Button>
@@ -79,6 +79,26 @@ const SellersignIn = () => {
             here
           </a>
         </Form>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <h6>
+          {" "}
+          Click &nbsp;
+          <a style={{ color: "blue" }} href="/#">
+            here
+          </a>{" "}
+          To Go Back 🔙{" "}
+        </h6>
       </div>
     </div>
   );

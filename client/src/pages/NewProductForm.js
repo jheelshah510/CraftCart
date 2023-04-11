@@ -101,8 +101,8 @@ const NewProductForm = () => {
       <Form
         style={{
           width: "75vh",
-          marginLeft: "65vh",
-          marginTop: "3vh",
+          marginLeft: "75vh",
+          marginTop: "5vh",
         }}
         onSubmit={handleSubmitForm}
         className="shadow-lg p-5 mb-5 bg-white rounded"

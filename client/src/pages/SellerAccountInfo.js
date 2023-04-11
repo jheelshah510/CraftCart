@@ -35,7 +35,7 @@ const SellerAccountInfo = () => {
           className="table"
           style={{ textAlign: "center", height: "90vh" }}
         >
-          <thead className="thead-dark">
+          <thead className="table-secondary">
             <tr>
               <th scope="col" colSpan="2">
                 Account Info

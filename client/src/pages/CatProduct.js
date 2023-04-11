@@ -43,14 +43,15 @@ const CatProduct = () => {
         style={{
           height: "20px",
           width: "100vw",
-          marginTop: "30px",
+          marginTop: "20px",
+          marginBottom: "20px",
           marginLeft: "2%",
         }}
       >
-        Category:{Object.values(catName)}
+        Do you want more items of {Object.values(catName)}? Here they are...
       </h2>
       <div style={{ display: "flex" }}>
-        <div style={{ margin: "1%", width: "70%" }}>
+        <div style={{ margin: "0%", width: "100%" }}>
           {products.map((product) => (
             <div
               className="singleproduct"

@@ -66,14 +66,17 @@ const SellerDashProducts = () => {
   return (
     <div>
       <SellerNavigation />
-      <div style={{ width: "80%", margin: "10%" }}>
+      <div style={{ width: "100%", margin: "0%" }}>
         <table class="table">
-          <thead class="thead-dark">
+          <thead class="table-secondary">
             <tr>
               <th colSpan="4" style={{ textAlign: "center" }}>
                 Your Products
               </th>
             </tr>
+          </thead>
+          <br />
+          <thead class="table-secondary">
             <tr>
               <th scope="col">#</th>
               <th scope="col">Name</th>

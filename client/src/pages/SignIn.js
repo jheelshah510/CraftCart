@@ -43,7 +43,7 @@ const SignIn = () => {
           Sign In
         </h1>
       </span>
-      <div style={{ width: "20%", paddingLeft: "70px" }}>
+      <div style={{ width: "20%", paddingLeft: "80px" }}>
         <Form onSubmit={login}>
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Email address</Form.Label>
@@ -66,7 +66,7 @@ const SignIn = () => {
           <Button
             variant="outline-primary"
             type="submit"
-            style={{ marginLeft: "10vh", marginTop: "1vh" }}
+            style={{ marginLeft: "11vh", marginTop: "1vh" }}
           >
             SignIn
           </Button>
@@ -84,6 +84,20 @@ const SignIn = () => {
             here
           </a>
         </Form>
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <h6>
+          {" "}
+          Click &nbsp;
+          <a style={{ color: "blue" }} href="/#">
+            here
+          </a>{" "}
+          To Go Back 🔙{" "}
+        </h6>
       </div>
     </div>
   );
