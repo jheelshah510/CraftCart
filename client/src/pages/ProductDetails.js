@@ -72,17 +72,17 @@ const ProductDetails = () => {
       <Navigation />
       <Button
         className="add-cart"
-        style={{ marginLeft: "50vh", marginTop: "5vh" }}
+        style={{ marginLeft: "10vh", marginTop: "7vh" }}
         onClick={() => goBack()}
       >
         <FontAwesomeIcon icon={faArrowLeft} />
         <b> Back To Products</b>
       </Button>
-      <div className="super" style={{ marginLeft: "45vh", marginTop: "1vh" }}>
+      <div className="super" style={{ marginLeft: "10vh", marginTop: "1vh" }}>
         <div className="main">
           <img
             src={selectedImage}
-            style={{ height: "40vh", width: "25vw" }}
+            style={{ height: "50vh", width: "30vw" }}
             alt="An Alt Text"
           />
           <div className="flex_row">
@@ -94,20 +94,31 @@ const ProductDetails = () => {
                     alt={product.productName}
                     onClick={() => handleClick(index)}
                     className={selectedImage === index ? "clicked" : ""}
-                    style={{ height: "10vh", cursor: "pointer" }}
+                    style={{
+                      height: "20vh",
+                      cursor: "pointer",
+                      marginRight: "10vh",
+                    }}
                   />
                 </div>
               ))}
           </div>
         </div>
-        <div className="details">
-          <h2 style={{ width: "70%" }}>{product.productName}</h2>
+        <div className="details" style={{ marginRight: "10px" }}>
+          <h2 style={{ width: "100%", marginRight: "10px" }}>
+            {product.productName}
+          </h2>
           <h3>Price :&#x20B9;{product.price}</h3>
-          <div style={{ maxWidth: "70%", marginBottom: "2px" }}>
-            {product.description}
+          <br />
+          <div style={{ maxWidth: "90%", marginBottom: "12px" }}>
+            <h5>{product.description}</h5>
           </div>
-          <h4>Seller : {product.sellerName}</h4>
+          <br />
+          <h4>
+            <b>Seller : {product.sellerName}</b>
+          </h4>
           <h4>Available Qty: {product.quantity}</h4>
+          <br />
           <div className="increase-decrease">
             <button onClick={setDecrease}>
               <FontAwesomeIcon icon={faMinus} />
@@ -117,6 +128,7 @@ const ProductDetails = () => {
               <FontAwesomeIcon icon={faPlus} />
             </button>
           </div>
+          <br />
 
           {!loggedIn && (
             <NavLink to="/cart" onClick={() => addToCart(id, amount, product)}>

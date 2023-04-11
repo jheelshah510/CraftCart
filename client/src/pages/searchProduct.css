@@ -1,0 +1,11 @@
+.prod {
+  display: "flex";
+  margin: "1%";
+  border: "1px solid black";
+  cursor: "pointer";
+  background-color: "#ffffff";
+}
+
+.prod:hover {
+  background-color: "#e4e7ed";
+}

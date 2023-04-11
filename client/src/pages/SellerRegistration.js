@@ -104,7 +104,7 @@ const SellerRegistration = () => {
       <Form
         style={{
           width: "75vh",
-          marginLeft: "65vh",
+          marginLeft: "75vh",
           marginTop: "5vh",
         }}
         onSubmit={handleSubmitFile}
@@ -239,6 +239,17 @@ const SellerRegistration = () => {
         >
           Register
         </Button>
+        <br />
+        <br />
+        <br />
+        <h6>
+          {" "}
+          Click &nbsp;
+          <a style={{ color: "blue" }} href="/#">
+            here
+          </a>{" "}
+          To Go Back 🔙{" "}
+        </h6>
       </Form>
     </div>
   );

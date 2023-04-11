@@ -52,7 +52,12 @@ const Cart = () => {
         <div>
           <Navigation />
           <Card
-            style={{ marginTop: "1%", marginLeft: "5%", width: "50%" }}
+            style={{
+              marginTop: "1%",
+              marginLeft: "2%",
+              width: "96%",
+              marginRight: "1%",
+            }}
             body
           >
             {allData.address && allData.phoneNumber && allData.pincode && (
@@ -80,10 +85,10 @@ const Cart = () => {
           <div style={{ display: "flex" }}>
             <div
               style={{
-                marginLeft: "5%",
+                marginLeft: "2%",
                 marginRight: "2%",
                 marginTop: "1%",
-                width: "80%",
+                width: "100%",
               }}
             >
               {cart.map((currElem) => {
@@ -93,7 +98,7 @@ const Cart = () => {
                     style={{
                       display: "flex",
                       border: "1px solid black",
-                      width: "90%",
+                      width: "100%",
                       marginBottom: "3%",
                     }}
                   >
@@ -103,14 +108,18 @@ const Cart = () => {
                         style={{ width: "15vw", height: "20vh", margin: "5px" }}
                         alt="hello"
                       />
+                      <br />
+                      <br />
+
                       <div
                         className="increase-decrease"
-                        style={{ marginLeft: "30%", marginBottom: "1%" }}
+                        style={{ marginLeft: "35%", marginBottom: "1%" }}
                       >
                         <button onClick={() => setDecrease(currElem.id)}>
                           <FontAwesomeIcon icon={faMinus} />
                         </button>
-                        <h4 style={{ margin: "2px" }}>{currElem.amount}</h4>
+                        <br />
+                        <h4 style={{ margin: "3px" }}>{currElem.amount}</h4>
                         <button onClick={() => setIncrement(currElem.id)}>
                           <FontAwesomeIcon icon={faPlus} />
                         </button>
@@ -120,23 +129,36 @@ const Cart = () => {
                       <h3>{currElem.name}</h3>
 
                       <h4>&#x20B9;{currElem.price * currElem.amount}</h4>
+                      <br />
+
+                      <br />
+                      <br />
 
                       <Button
+                        style={{ marginTop: "1%" }}
                         variant="outline-danger"
                         onClick={() => removeItem(currElem.id)}
                       >
                         {" "}
                         Remove{" "}
                       </Button>
+                      <br />
+                      <br />
                     </div>
                   </div>
                 );
               })}
 
               <Button
-                variant="info"
+                variant="primary"
                 type="submit"
                 onClick={() => history.push("/searchproduct")}
+                style={{
+                  width: "10vw",
+                  height: "6vh",
+                  marginTop: "20px",
+                  marginLeft: "4vw",
+                }}
               >
                 {" "}
                 Continue Shopping{" "}
@@ -164,7 +186,7 @@ const Cart = () => {
               <Card
                 style={{
                   width: "18rem",
-                  height: "15rem",
+                  height: "14.5rem",
                   border: "1px groove black",
                 }}
               >
